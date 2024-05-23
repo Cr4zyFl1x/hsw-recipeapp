@@ -270,15 +270,6 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/quantityTextInputLayout"
-            android:layout_width="107dp"
-            android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="68dp"
-            tools:layout_editor_absoluteY="97dp">
-
-        </com.google.android.material.textfield.TextInputLayout>
-
         <TextView
             android:id="@+id/titelCategorysTextView"
             android:layout_width="wrap_content"
