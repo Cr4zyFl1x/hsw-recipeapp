@@ -24,7 +24,7 @@
                     android:ems="10"
                     android:id="@+id/locationInput"
                     android:layout_weight="1"
-                    android:hint="Suche" />
+                    android:hint="@string/suche" />
 
             <Space
                     android:layout_width="wrap_content"
@@ -32,7 +32,7 @@
                     android:layout_weight="1" />
 
             <Button
-                    android:text="Suchen"
+                    android:text="@string/suchen"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/refreshButton"
@@ -41,7 +41,7 @@
         </LinearLayout>
 
         <Button
-                android:text="Mein Standort"
+                android:text="@string/mein_standort"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/currentLocationButton"
@@ -89,7 +89,7 @@
         </LinearLayout>
 
         <TextView
-                android:text="Aktuelle Vorhersage"
+                android:text="@string/aktuelle_vorhersage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/weatherForecastText"
@@ -99,7 +99,7 @@
                 android:textSize="16sp"
                 android:gravity="center" />
 
-        <FrameLayout
+        <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/weatherNextDaysLayout"
@@ -107,7 +107,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp">
 
-        </FrameLayout>
+        </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
 

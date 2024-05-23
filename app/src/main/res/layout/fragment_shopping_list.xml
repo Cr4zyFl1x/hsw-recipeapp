@@ -24,12 +24,12 @@
                 android:inputType="text"
                 android:ems="10"
                 android:id="@+id/addEntryInput"
-                android:hint="Eintrag hinzufügen"
+                android:hint="@string/eintrag_hinzufuegen"
                 android:layout_weight="1" />
 
 
         <Button
-                android:text="+"
+                android:text="@string/plus_symbol"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:textSize="20sp"
@@ -38,7 +38,7 @@
                 android:foregroundGravity="right" />
     </LinearLayout>
 
-    <FrameLayout
+    <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout"
@@ -47,12 +47,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp"
-            android:id="@+id/activeEntriesList">
-
-    </FrameLayout>
+            android:id="@+id/activeEntriesList"/>
 
     <TextView
-            android:text="Erledigte Einträge"
+            android:text="@string/erledigte_eintraege"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/completedEntriesText"
@@ -61,7 +59,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintEnd_toEndOf="parent"
-            android:textSize="15sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
