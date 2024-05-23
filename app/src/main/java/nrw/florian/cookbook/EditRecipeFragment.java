@@ -44,7 +44,7 @@ public class EditRecipeFragment extends Fragment {
         quantityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // Finde den Spinner
-        Spinner typeOfQuantitySpinner = view.findViewById(R.id.typeOfQuantitySpinner);
+        Spinner typeOfQuantitySpinner = binding.typeOfQuantitySpinner;
 
         // Setze den ArrayAdapter auf den Spinner
         typeOfQuantitySpinner.setAdapter(quantityAdapter);
@@ -59,7 +59,7 @@ public class EditRecipeFragment extends Fragment {
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // Finde den Spinner
-        Spinner categorySpinnerCreate = view.findViewById(R.id.categorySpinnerCreate);
+        Spinner categorySpinnerCreate = binding.categorySpinnerCreate;
 
         // Setze den ArrayAdapter auf den Spinner
         categorySpinnerCreate.setAdapter(categoryAdapter);
@@ -74,7 +74,7 @@ public class EditRecipeFragment extends Fragment {
         difficultyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // Finde den Spinner
-        Spinner difficultySpinnerCreate = view.findViewById(R.id.diffcultySpinnerCreate);
+        Spinner difficultySpinnerCreate = binding.diffcultySpinnerCreate;
 
         // Setze den ArrayAdapter auf den Spinner
         difficultySpinnerCreate.setAdapter(difficultyAdapter);

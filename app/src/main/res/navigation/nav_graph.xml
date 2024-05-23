@@ -28,11 +28,11 @@
     <fragment
         android:id="@+id/recipeOverviewFragment"
         android:name="nrw.florian.cookbook.RecipeOverviewFragment"
-        android:label="fragment_recipe_overview"
+        android:label="@string/label_editRecipeFragment"
         tools:layout="@layout/fragment_recipe_overview" />
     <fragment
         android:id="@+id/editRecipeFragment"
         android:name="nrw.florian.cookbook.EditRecipeFragment"
-        android:label="fragment_edit_recipe"
+        android:label="@string/label_RecipeOverviewFragment"
         tools:layout="@layout/fragment_edit_recipe" />
 </navigation>
