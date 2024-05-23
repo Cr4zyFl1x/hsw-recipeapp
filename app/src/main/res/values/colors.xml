@@ -2,4 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="primary">#a83258</color>
+    <color name="primaryVariant">#7d314a</color>
+    <color name="vegetarian">#46c010</color>
+    <color name="lightBackground">#efebdc</color>
+    <color name="darkBackground">#403a3a</color>
 </resources>
