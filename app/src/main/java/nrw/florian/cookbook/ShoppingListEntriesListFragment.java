@@ -10,15 +10,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.ListFragment;
 
+import java.util.ArrayList;
+
 public class ShoppingListEntriesListFragment extends ListFragment {
-//    private ShoppingListCursorAdapter adapter;
+    //    private ShoppingListCursorAdapter adapter;
     private Cursor cursor;
+    private ArrayList<ShoppingListEntry> entries;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*adapter = new ShoppingListCursorAdapter(requireContext());
-        setListAdapter(adapter);*/
+//        setListAdapter(new ActiveEntriesBaseAdapter(getContext()));
     }
 
     @Nullable
@@ -30,10 +32,16 @@ public class ShoppingListEntriesListFragment extends ListFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
 //        adapter.changeCursor();
     }
 
-    public void createCursor() {
-
+    public void setUpEntries() {
+        this.entries = new ArrayList<>();
+        entries.add(new ShoppingListEntry("Äpfel"));
+        entries.add(new ShoppingListEntry("Bananen"));
+        entries.add(new ShoppingListEntry("Brot"));
+        entries.add(new ShoppingListEntry("Milch"));
+        entries.add(new ShoppingListEntry("Wasser"));
     }
 }

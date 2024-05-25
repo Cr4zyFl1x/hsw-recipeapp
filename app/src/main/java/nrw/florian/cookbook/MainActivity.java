@@ -10,10 +10,10 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
 
 import nrw.florian.cookbook.databinding.ActivityMainBinding;
 
@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
+    private ArrayList<ShoppingListEntry> entries;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,14 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        /*setUpEntries();
+
+        RecyclerView recyclerView = findViewById(R.id.activeEntriesList);
+
+        ActiveEntriesRecyclerViewAdapter adapter = new ActiveEntriesRecyclerViewAdapter(this, entries);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));*/
 
         setSupportActionBar(binding.toolbar);
 
@@ -43,11 +52,6 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
-        RecyclerView recyclerView = findViewById(R.id.activeEntriesList);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-
-
     }
 
     @Override
@@ -77,5 +81,14 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public void setUpEntries() {
+        this.entries = new ArrayList<>();
+        entries.add(new ShoppingListEntry("Äpfel"));
+        entries.add(new ShoppingListEntry("Bananen"));
+        entries.add(new ShoppingListEntry("Brot"));
+        entries.add(new ShoppingListEntry("Milch"));
+        entries.add(new ShoppingListEntry("Wasser"));
     }
 }

@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+        <action
+                android:id="@+id/action_FirstFragment_to_shoppingListFragment2"
+                app:destination="@id/shoppingListFragment2" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -24,5 +27,19 @@
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/shoppingListFragment"
+            android:name="nrw.florian.cookbook.ShoppingListFragment"
+            android:label="fragment_shopping_list"
+            tools:layout="@layout/fragment_shopping_list" />
+    <fragment
+            android:id="@+id/shoppingListFragment2"
+            android:name="nrw.florian.cookbook.ShoppingListFragment2"
+            android:label="fragment_shopping_list2"
+            tools:layout="@layout/fragment_shopping_list2" >
+        <action
+                android:id="@+id/action_shoppingListFragment2_to_FirstFragment"
+                app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>
