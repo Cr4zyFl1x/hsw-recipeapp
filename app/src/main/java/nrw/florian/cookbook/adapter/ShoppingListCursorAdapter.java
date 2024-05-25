@@ -24,6 +24,6 @@ public class ShoppingListCursorAdapter extends CursorAdapter {
     public void bindView(View view, Context context, Cursor cursor) {
         FragmentShoppingListItemBinding binding = FragmentShoppingListItemBinding.bind(view);
         // TODO: wenn Datenbank steht hier Cursor einfügen
-        binding.shoppingsListEntry.setText("Äpfel");
+        binding.shoppingListEntryText.setText("Äpfel");
     }
 }

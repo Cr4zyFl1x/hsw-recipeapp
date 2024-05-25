@@ -35,9 +35,9 @@
             tools:layout="@layout/fragment_shopping_list" />
     <fragment
             android:id="@+id/shoppingListFragment2"
-            android:name="nrw.florian.cookbook.ShoppingListFragment2"
-            android:label="fragment_shopping_list2"
-            tools:layout="@layout/fragment_shopping_list2" >
+            android:name="nrw.florian.cookbook.ShoppingListFragment"
+            android:label="Einkaufsliste"
+            tools:layout="@layout/fragment_shopping_list" >
         <action
                 android:id="@+id/action_shoppingListFragment2_to_FirstFragment"
                 app:destination="@id/FirstFragment" />
