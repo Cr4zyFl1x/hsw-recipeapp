@@ -7,6 +7,14 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <string name="permission">Berechtigung anfordern</string>
+    <string name="permission_granted">Berechtigung erteilt</string>
+    <string name="permission_already_granted">Berechtigung bereits erteilt</string>
+    <string name="permission_request">Möchten Sie diese Berechtigung wirklich erteilen?</string>
+    <string name="permission_denied">Berechtigungsanfrage abgelehnt</string>
+
+    <string name="api_key">7e77eb340f3f5e8e118a9724031a4ca4</string>
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus

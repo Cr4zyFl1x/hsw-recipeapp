@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+        <action
+                android:id="@+id/action_FirstFragment_to_weatherFragment"
+                app:destination="@id/weatherFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -24,5 +27,14 @@
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+    </fragment>
+    <fragment
+            android:id="@+id/weatherFragment"
+            android:name="nrw.florian.cookbook.WeatherFragment"
+            android:label="Wetter"
+            tools:layout="@layout/fragment_weather" >
+        <action
+                android:id="@+id/action_weatherFragment_to_FirstFragment"
+                app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>
