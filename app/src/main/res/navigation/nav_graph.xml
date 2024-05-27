@@ -3,15 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/recipeDetailsFragment">
+    app:startDestination="@id/entryFragment">
+    app:startDestination="@id/editRecipeFragment">
+
     <fragment
         android:id="@+id/entryFragment"
         android:name="nrw.florian.cookbook.fragment.view.EntryFragment"
         android:label="@string/fragment_entry_title"
         tools:layout="@layout/fragment_entry" />
+
     <fragment
         android:id="@+id/recipeDetailsFragment"
         android:name="nrw.florian.cookbook.fragment.view.RecipeDetailsFragment"
         android:label="fragment_recipe_details"
         tools:layout="@layout/fragment_recipe_details" />
+    <fragment
+        android:id="@+id/recipeOverviewFragment"
+        android:name="nrw.florian.cookbook.RecipeOverviewFragment"
+        android:label="@string/label_editRecipeFragment"
+        tools:layout="@layout/fragment_recipe_overview" />
+    <fragment
+        android:id="@+id/editRecipeFragment"
+        android:name="nrw.florian.cookbook.EditRecipeFragment"
+        android:label="@string/label_RecipeOverviewFragment"
+        tools:layout="@layout/fragment_edit_recipe" />
 </navigation>

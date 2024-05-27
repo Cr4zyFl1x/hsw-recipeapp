@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RecipeOverviewFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <CheckBox
+            android:id="@+id/meatCheckBox"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:text="Fleisch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/warmCheckBox"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="Warm"
+            app:layout_constraintStart_toEndOf="@+id/meatCheckBox"
+            app:layout_constraintTop_toTopOf="@+id/meatCheckBox" />
+
+        <CheckBox
+            android:id="@+id/vegetrainCheckBox"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="Vegetarisch"
+            app:layout_constraintStart_toStartOf="@+id/meatCheckBox"
+            app:layout_constraintTop_toBottomOf="@+id/meatCheckBox" />
+
+        <CheckBox
+            android:id="@+id/coldCheckBox"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="Kalt"
+            app:layout_constraintStart_toStartOf="@+id/warmCheckBox"
+            app:layout_constraintTop_toBottomOf="@+id/warmCheckBox" />
+
+        <Spinner
+            android:id="@+id/categoryDropDown"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/coldCheckBox"
+            app:layout_constraintStart_toStartOf="@+id/vegetrainCheckBox"
+            app:layout_constraintTop_toBottomOf="@+id/coldCheckBox" />
+
+        <Spinner
+            android:id="@+id/diffcultyDropDown"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/categoryDropDown"
+            app:layout_constraintStart_toStartOf="@+id/categoryDropDown"
+            app:layout_constraintTop_toBottomOf="@+id/categoryDropDown" />
+
+        <LinearLayout
+            android:layout_width="409dp"
+            android:layout_height="660dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginEnd="1dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/diffcultyDropDown"></LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
