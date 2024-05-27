@@ -45,6 +45,15 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+  
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+  
+    <string name="erledigte_eintraege">Erledigte Einträge</string>
+    <string name="plus_symbol">+</string>
+    <string name="eintrag_hinzufuegen">Eintrag hinzufügen</string>
+    <string name="suchen">Suchen</string>
+    <string name="mein_standort">Mein Standort</string>
+    <string name="aktuelle_vorhersage">Aktuelle Vorhersage</string>
+    <string name="suche">Suche</string>
 </resources>
