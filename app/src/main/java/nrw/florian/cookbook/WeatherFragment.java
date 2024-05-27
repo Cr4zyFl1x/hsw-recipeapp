@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,37 +21,21 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import nrw.florian.cookbook.adapter.WeatherForecastRecyclerViewAdapter;
 import nrw.florian.cookbook.databinding.FragmentWeatherBinding;
 import nrw.florian.cookbook.weather.Weather;
 
 public class WeatherFragment extends Fragment {
     private FragmentWeatherBinding binding;
-    private RecyclerView forecastRecyclerView;
-    private WeatherForecastRecyclerViewAdapter forecastAdapter;
 
     private final String ACCESS_COARSE_LOCATION = android.Manifest.permission.ACCESS_COARSE_LOCATION;
     private final String ACCESS_FINE_LOCATION = android.Manifest.permission.ACCESS_FINE_LOCATION;
     private final String ACCESS_BACKGROUND_LOCATION = android.Manifest.permission.ACCESS_BACKGROUND_LOCATION;
 
-//    private ArrayList<Weather> weatherForecastList;
-    List<Weather> weatherForecastList = Collections.synchronizedList(new ArrayList<>());
-    List<Double> coordList = Collections.synchronizedList(new ArrayList<>());
     private String currentLocation = "Muenster"; // TODO: noch anpassen -> Aktueller Standort der automatisch ermittelt wird
-    private String longitude;
-    private String latitude;
-
-    private Weather mornWeather;
-    private Weather eveWeather;
-    private Weather nightWeather;
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -130,8 +113,6 @@ public class WeatherFragment extends Fragment {
                 currentWeatherBuilder.windDirection(wind.getDouble("deg"));
             }
 
-
-
             Weather currentWeather = currentWeatherBuilder.build();
 
             requireActivity()
@@ -147,68 +128,6 @@ public class WeatherFragment extends Fragment {
                                 binding.windSpeed.setText(String.format("%s m/s ", currentWeather.getWind()));
                                 binding.windDirection.setText(currentWeather.getWindDirection());
                                 binding.humidityText.setText(String.format("%s %%", currentWeather.getHumidity()));
-                            });
-
-        } catch (IOException | JSONException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void getWeatherForecast(String location) {
-        String url = String.format("https://api.openweathermap.org/data/2.5/forecast?lat=%s&lon=%s&appid=%s", latitude, longitude, R.string.api_key);
-        /*String url =
-                "https://api.openweathermap.org/data/2.5/weather?q="
-                        + location
-                        + "&appid="
-                        + getString(R.string.api_key);*/
-
-        try {
-            HttpsURLConnection connection = (HttpsURLConnection) new URL(url).openConnection();
-            if (connection.getResponseCode() != HttpsURLConnection.HTTP_OK) {
-                requireActivity().runOnUiThread(() -> binding.weatherDetailsLinearLayout.setVisibility(View.INVISIBLE));
-                return;
-            }
-
-            String response =
-                    new BufferedReader(new InputStreamReader(connection.getInputStream()))
-                            .lines()
-                            .collect(Collectors.joining("\n"));
-            JSONObject json = new JSONObject(response);
-            connection.disconnect();
-
-            weatherForecastList = new ArrayList<>();
-
-            Weather.WeatherBuilder morningWeatherBuilder = new Weather.WeatherBuilder();
-            Weather.WeatherBuilder eveningWeatherBuilder = new Weather.WeatherBuilder();
-            Weather.WeatherBuilder nightWeatherBuilder = new Weather.WeatherBuilder();
-
-            if (json.has("list")) {
-                JSONArray list = json.getJSONArray("list");
-
-            }
-
-            if (json.has("temp")) {
-                JSONObject temp = json.getJSONObject("temp");
-                morningWeatherBuilder.temp(Double.toString(temp.getDouble("morn") - 273.15));
-                eveningWeatherBuilder.temp(Double.toString(temp.getDouble("eve") - 273.15));
-                nightWeatherBuilder.temp(Double.toString(temp.getDouble("night") - 273.15));
-            }
-
-            if (json.has("weather")) {
-                JSONArray weatherArray = json.getJSONArray("weather");
-                if (weatherArray.length() > 0) {
-                    JSONObject weather = weatherArray.getJSONObject(0);
-                    morningWeatherBuilder.icon(retrieveWeatherImage(weather.getString("icon")));
-                    eveningWeatherBuilder.icon(retrieveWeatherImage(weather.getString("icon")));
-                    nightWeatherBuilder.icon(retrieveWeatherImage(weather.getString("icon")));
-                }
-            }
-
-
-            requireActivity()
-                    .runOnUiThread(
-                            () -> {
-                                binding.weatherDetailsLinearLayout.setVisibility(View.VISIBLE);
                             });
 
         } catch (IOException | JSONException e) {
