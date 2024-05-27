@@ -91,4 +91,7 @@
     <string name="eintrag_hinzufuegen">Eintrag hinzufügen</string>
     <string name="mein_standort">Mein Standort</string>
     <string name="aktuelle_vorhersage">Aktuelle Vorhersage</string>
+
+    <string name="suche">Suche</string>
+    <string name="suchen">Suchen</string>
 </resources>
