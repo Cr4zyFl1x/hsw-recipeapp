@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.view.EntryFragment" >
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="310dp"
+        android:layout_height="211dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/logo_autocrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/recipeOverviewMenuButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="@string/recipe_overview"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <Button
+        android:id="@+id/addRecipeMenuButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/recipe_add"
+        app:layout_constraintEnd_toEndOf="@+id/recipeOverviewMenuButton"
+        app:layout_constraintStart_toStartOf="@+id/recipeOverviewMenuButton"
+        app:layout_constraintTop_toBottomOf="@+id/recipeOverviewMenuButton" />
+
+    <Button
+        android:id="@+id/shoppingListMenuButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/shopping_list"
+        app:layout_constraintEnd_toEndOf="@+id/addRecipeMenuButton"
+        app:layout_constraintStart_toStartOf="@+id/addRecipeMenuButton"
+        app:layout_constraintTop_toBottomOf="@+id/addRecipeMenuButton" />
+
+    <Button
+        android:id="@+id/weatherMenuButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/weather"
+        app:layout_constraintEnd_toEndOf="@+id/shoppingListMenuButton"
+        app:layout_constraintStart_toStartOf="@+id/shoppingListMenuButton"
+        app:layout_constraintTop_toBottomOf="@+id/shoppingListMenuButton" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/weatherMenuButton"
+        app:layout_constraintStart_toStartOf="@+id/weatherMenuButton">
+
+        <ImageView
+            android:id="@+id/menuWeatherIconImageView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/cloudy_sun_placeholder"
+            app:srcCompat="@drawable/cloudy_sun_placeholder"
+            tools:srcCompat="@drawable/cloudy_sun_placeholder" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/menuWeatherLocationTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hamelin"
+                android:textAlignment="viewStart"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/menuWeatherTemperatureTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="20 °C"
+                android:textColor="@color/gray" />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
