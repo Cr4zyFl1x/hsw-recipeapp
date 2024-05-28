@@ -2,13 +2,10 @@ package nrw.florian.cookbook.weather;
 
 import android.graphics.Bitmap;
 
-import nrw.florian.cookbook.enums.WeatherTime;
-
 public class Weather {
     private String location;
     private String temp;
     private Bitmap icon;
-    private String time;
     private String humidity;
     private String minTemp;
     private String maxTemp;
@@ -20,7 +17,6 @@ public class Weather {
         this.location = weatherBuilder.location;
         this.temp = weatherBuilder.temp;
         this.icon = weatherBuilder.icon;
-        this.time = weatherBuilder.time;
         this.humidity = weatherBuilder.humidity;
         this.minTemp = weatherBuilder.minTemp;
         this.maxTemp = weatherBuilder.maxTemp;
@@ -39,10 +35,6 @@ public class Weather {
 
     public Bitmap getIcon() {
         return icon;
-    }
-
-    public String getTime() {
-        return time;
     }
 
     public String getHumidity() {
@@ -73,7 +65,6 @@ public class Weather {
         private String location;
         private String temp;
         private Bitmap icon;
-        private String time;
         private String humidity;
         private String minTemp;
         private String maxTemp;
@@ -93,11 +84,6 @@ public class Weather {
 
         public WeatherBuilder icon(Bitmap icon) {
             this.icon = icon;
-            return this;
-        }
-
-        public WeatherBuilder time(WeatherTime time) {
-            this.time = time.getLongName();
             return this;
         }
 
