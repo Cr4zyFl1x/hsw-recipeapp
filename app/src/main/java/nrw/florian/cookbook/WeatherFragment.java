@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,6 +34,7 @@ public class WeatherFragment extends Fragment {
     private Location currentLocation;
     private GPSTracker gpsTracker;
 
+    private final String apiKey = BuildConfig.API_KEY;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,12 +54,24 @@ public class WeatherFragment extends Fragment {
         getGPSLocationFromOptional(view);
         new Thread(() -> refreshWeather(currentLocation)).start();
 
-        binding.searchButton.setOnClickListener(v -> new Thread(() -> refreshWeather(binding.locationInput.getText().toString())).start());
+        binding.searchButton.setOnClickListener(
+
+        v -> {
+            if (isFieldFilled(binding.locationInput)) {
+                new Thread(() -> refreshWeather(binding.locationInput.getText().toString())).start();
+            } else {
+                binding.locationInput.setError(getString(R.string.location_required));
+            }
+        });
 
         binding.getCurrentLocationButton.setOnClickListener(v -> new Thread(() -> {
             getGPSLocationFromOptional(view);
             refreshWeather(currentLocation);
         }).start());
+    }
+
+    private boolean isFieldFilled(EditText field) {
+        return !field.getText().toString().isEmpty();
     }
 
     private void getGPSLocationFromOptional(View view) {
@@ -71,8 +85,16 @@ public class WeatherFragment extends Fragment {
 
 
     private void refreshWeather(String locationInput) {
-        String url = "https://api.openweathermap.org/data/2.5/weather?q=" + locationInput + "&appid=" + getString(R.string.api_key);
+        String url = String.format("https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s", locationInput, this.apiKey);
+        processJsonResult(url);
+    }
 
+    private void refreshWeather(Location location) {
+        String url = String.format("https://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&appid=%s", location.getLatitude(), location.getLongitude(), this.apiKey);
+        processJsonResult(url);
+    }
+
+    private void processJsonResult(String url) {
         try {
             Optional<JSONObject> result = makeAPICall(url);
             if (!result.isPresent()) {
@@ -93,6 +115,18 @@ public class WeatherFragment extends Fragment {
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private Bitmap retrieveWeatherImage(String imageName) {
+        try {
+            HttpURLConnection con = (HttpURLConnection) new URL(String.format("https://openweathermap.org/img/w/%s.png", imageName )).openConnection();
+            Bitmap bitmap = BitmapFactory.decodeStream(con.getInputStream());
+            con.disconnect();
+            return bitmap;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private void getWeatherDataFromJson(JSONObject json, Weather.WeatherBuilder currentWeatherBuilder) throws JSONException {
@@ -119,7 +153,6 @@ public class WeatherFragment extends Fragment {
             currentWeatherBuilder.windDirection(wind.getDouble("deg"));
         }
     }
-
     private void updateWeatherDetailsLayout(Weather currentWeather) {
         binding.weatherDetailsLinearLayout.setVisibility(View.VISIBLE);
         binding.locationText.setText(currentWeather.getLocation());
@@ -132,70 +165,5 @@ public class WeatherFragment extends Fragment {
         binding.windSpeed.setText(String.format("%s m/s ", currentWeather.getWind()));
         binding.windDirection.setText(currentWeather.getWindDirection());
         binding.humidityText.setText(String.format("%s %%", currentWeather.getHumidity()));
-    }
-
-    private Bitmap retrieveWeatherImage(String imageName) {
-        try {
-            HttpURLConnection con = (HttpURLConnection) new URL("https://openweathermap.org/img/w/" + imageName + ".png").openConnection();
-            Bitmap bitmap = BitmapFactory.decodeStream(con.getInputStream());
-            con.disconnect();
-            return bitmap;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    /*private void getGPSLocation(View view) {
-        if (ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Snackbar.make(getContext(), view, getString(R.string.no_permission_cannot_access_location),
-                            Snackbar.LENGTH_LONG)
-                    .setAction(R.string.permission_edit, click -> {
-                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                        Uri uri = Uri.fromParts("package", requireContext().getPackageName(), null);
-                        intent.setData(uri);
-                        startActivity(intent);
-                    })
-                    .show();
-            return;
-        }
-        fusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location != null) {
-                    nrw.florian.cookbook.Location.LocationBuilder currentLocationBuilder = new nrw.florian.cookbook.Location.LocationBuilder();
-                    currentLocationBuilder.latitude(location.getLatitude());
-                    currentLocationBuilder.longitude(location.getLongitude());
-                    currentLocation = currentLocationBuilder.build();
-                    new Thread(() -> refreshWeather(currentLocation)).start();
-                }
-            }
-        });
-    }*/
-    private void refreshWeather(Location location) {
-        String url = String.format("https://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&appid=%s", location.getLatitude(), location.getLongitude(), "7e77eb340f3f5e8e118a9724031a4ca4"); // TODO: api_key nicht mit hochladen
-
-        try {
-            Optional<JSONObject> result = makeAPICall(url);
-            if (!result.isPresent()) {
-                requireActivity().runOnUiThread(() -> binding.weatherDetailsLinearLayout.setVisibility(View.INVISIBLE));
-                Snackbar.make(requireContext(), requireView(), getString(R.string.error_weather_api), Snackbar.LENGTH_LONG).show();
-                return;
-            }
-            JSONObject json = result.get();
-
-            Weather.WeatherBuilder currentWeatherBuilder = new Weather.WeatherBuilder().location(json.getString("name"));
-
-            getWeatherDataFromJson(json, currentWeatherBuilder);
-
-            Weather currentWeather = currentWeatherBuilder.build();
-
-            requireActivity().runOnUiThread(() ->
-                    updateWeatherDetailsLayout(currentWeather)
-            );
-
-        } catch (JSONException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
