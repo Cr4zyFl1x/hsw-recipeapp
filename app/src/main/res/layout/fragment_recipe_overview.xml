@@ -12,66 +12,83 @@
 
         <CheckBox
             android:id="@+id/meatCheckBox"
-            android:layout_width="110dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
-            android:text="Fleisch"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Fleischhaltig"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <CheckBox
             android:id="@+id/warmCheckBox"
-            android:layout_width="110dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginEnd="20dp"
             android:text="Warm"
-            app:layout_constraintStart_toEndOf="@+id/meatCheckBox"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/meatCheckBox"
             app:layout_constraintTop_toTopOf="@+id/meatCheckBox" />
 
         <CheckBox
             android:id="@+id/vegetrainCheckBox"
-            android:layout_width="110dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Vegetarisch"
+            android:textColor="@color/vegetarian"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/meatCheckBox"
             app:layout_constraintTop_toBottomOf="@+id/meatCheckBox" />
 
         <CheckBox
             android:id="@+id/coldCheckBox"
-            android:layout_width="110dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Kalt"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/warmCheckBox"
             app:layout_constraintStart_toStartOf="@+id/warmCheckBox"
             app:layout_constraintTop_toBottomOf="@+id/warmCheckBox" />
 
         <Spinner
-            android:id="@+id/categoryDropDown"
+            android:id="@+id/categorySpinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/coldCheckBox"
+            app:layout_constraintEnd_toEndOf="@+id/vegetrainCheckBox"
             app:layout_constraintStart_toStartOf="@+id/vegetrainCheckBox"
             app:layout_constraintTop_toBottomOf="@+id/coldCheckBox" />
 
+
         <Spinner
-            android:id="@+id/diffcultyDropDown"
+            android:id="@+id/diffcultySpinner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/categoryDropDown"
-            app:layout_constraintStart_toStartOf="@+id/categoryDropDown"
-            app:layout_constraintTop_toBottomOf="@+id/categoryDropDown" />
+            app:layout_constraintEnd_toEndOf="@+id/coldCheckBox"
+            app:layout_constraintStart_toStartOf="@+id/coldCheckBox"
+            app:layout_constraintTop_toTopOf="@id/categorySpinner" />
 
         <LinearLayout
             android:layout_width="409dp"
             android:layout_height="660dp"
             android:layout_marginStart="1dp"
+            android:layout_marginTop="108dp"
             android:layout_marginEnd="1dp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/diffcultyDropDown"></LinearLayout>
+            app:layout_constraintTop_toBottomOf="@+id/diffcultySpinner"></LinearLayout>
+
+        <Button
+            android:id="@+id/searchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Suchen"
+            app:layout_constraintStart_toStartOf="@id/diffcultySpinner"
+            app:layout_constraintTop_toBottomOf="@id/diffcultySpinner" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

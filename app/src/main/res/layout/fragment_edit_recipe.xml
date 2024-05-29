@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditRecipeFragment">
+    tools:context=".fragment.view.EditRecipeFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -38,7 +38,8 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="numberDecimal"
+            android:text="4"
             app:layout_constraintStart_toStartOf="@+id/recipeNameLayout"
             app:layout_constraintTop_toBottomOf="@+id/recipeNameLayout" />
 
@@ -58,6 +59,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
+            android:inputType="numberSigned|numberDecimal"
             android:hint="Menge"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@+id/servingsNumber"
@@ -132,26 +134,25 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/recipeDescriptionTextInput"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:hint="Rezeptbeschreibung" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <CheckBox
             android:id="@+id/meatCheckBoxCreate"
-            android:layout_width="125dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Fleisch"
+            android:text="Fleischhaltig"
             android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@+id/titelCategorysTextView"
             app:layout_constraintStart_toStartOf="@id/titelCategorysTextView"
-            tools:layout_editor_absoluteX="16dp" />
+            app:layout_constraintTop_toBottomOf="@+id/titelCategorysTextView" />
 
         <CheckBox
             android:id="@+id/warmCheckBoxCreate"
-            android:layout_width="110dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="30dp"
+            android:layout_marginEnd="20dp"
             android:text="Warm"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -160,7 +161,7 @@
 
         <CheckBox
             android:id="@+id/vegetarianCheckBoxCreate"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Vegetarisch"
             android:textColor="@color/vegetarian"
@@ -171,7 +172,7 @@
 
         <CheckBox
             android:id="@+id/coldCheckBoxCreate"
-            android:layout_width="110dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Kalt"
             android:textSize="16sp"
@@ -181,9 +182,10 @@
 
         <Spinner
             android:id="@+id/categorySpinnerCreate"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="@+id/vegetarianCheckBoxCreate"
             app:layout_constraintStart_toStartOf="@+id/vegetarianCheckBoxCreate"
             app:layout_constraintTop_toBottomOf="@+id/coldCheckBoxCreate" />
 
@@ -191,8 +193,8 @@
             android:id="@+id/diffcultySpinnerCreate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            app:layout_constraintStart_toEndOf="@id/categorySpinnerCreate"
+            app:layout_constraintEnd_toEndOf="@+id/coldCheckBoxCreate"
+            app:layout_constraintStart_toStartOf="@+id/coldCheckBoxCreate"
             app:layout_constraintTop_toTopOf="@id/categorySpinnerCreate" />
 
         <EditText
@@ -236,7 +238,7 @@
             app:layout_constraintTop_toBottomOf="@+id/workingHoursNumber" />
 
         <Button
-            android:id="@+id/safeButton"
+            android:id="@+id/saveButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="200dp"
@@ -249,7 +251,7 @@
             android:id="@+id/recipeImageButton"
             android:layout_width="122dp"
             android:layout_height="134dp"
-            android:layout_marginStart="2dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:src="@android:drawable/ic_menu_camera"
@@ -261,7 +263,7 @@
             android:id="@+id/recipeImageView"
             android:layout_width="122dp"
             android:layout_height="134dp"
-            android:layout_marginStart="2dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:visibility="invisible"
