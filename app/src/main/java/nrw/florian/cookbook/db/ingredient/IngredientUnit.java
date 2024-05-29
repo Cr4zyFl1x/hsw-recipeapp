@@ -4,6 +4,9 @@ import android.content.Context;
 
 import nrw.florian.cookbook.R;
 
+/**
+ * @author Florian J. Kleine-Vorholt
+ */
 public enum IngredientUnit {
 
     GRAMS (R.string.us_grams),
@@ -18,20 +21,34 @@ public enum IngredientUnit {
     MILLILITERS (R.string.us_milliliters),
     LITER (R.string.us_liter);
 
-
-
+    /**
+     * String resource id representing the value for the string
+     */
     private final int stringResId;
+
+
 
     IngredientUnit(final int stringResId)
     {
         this.stringResId = stringResId;
     }
 
+
+    /**
+     * Gets the resource id which represents the string value
+     * @return resource id
+     */
     public int getId()
     {
         return this.stringResId;
     }
 
+
+    /**
+     * Resolves the string value for the resource id
+     * @param ctx Context to get the string value from
+     * @return The String value for the unit
+     */
     public String getUnit(final Context ctx)
     {
         return ctx.getString(getId());
