@@ -98,23 +98,34 @@ public class WeatherFragment extends Fragment {
         try {
             Optional<JSONObject> result = makeAPICall(url);
             if (!result.isPresent()) {
-                requireActivity().runOnUiThread(() -> binding.weatherDetailsLinearLayout.setVisibility(View.INVISIBLE));
+                updateUIWhenNoResult();
                 Snackbar.make(requireContext(), requireView(), getString(R.string.error_weather_api), Snackbar.LENGTH_LONG).show();
                 return;
             }
             JSONObject json = result.get();
+            Weather currentWeather = processJson(json);
+            updateUI(currentWeather);
 
-            Weather.WeatherBuilder currentWeatherBuilder = new Weather.WeatherBuilder().location(json.getString("name"));
-
-            getWeatherDataFromJson(json, currentWeatherBuilder);
-            Weather currentWeather = currentWeatherBuilder.build();
-
-            requireActivity().runOnUiThread(() ->
-                    updateWeatherDetailsLayout(currentWeather)
-            );
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private Weather processJson(JSONObject json) throws JSONException {
+        Weather.WeatherBuilder currentWeatherBuilder = new Weather.WeatherBuilder().location(json.getString("name"));
+        processMainJson(json, currentWeatherBuilder);
+        processWeatherJson(json, currentWeatherBuilder);
+        processWindJson(json, currentWeatherBuilder);
+        return currentWeatherBuilder.build();
+    }
+
+    private void updateUIWhenNoResult() {
+        requireActivity().runOnUiThread(() -> binding.weatherDetailsLinearLayout.setVisibility(View.INVISIBLE));
+        Snackbar.make(requireContext(), requireView(), getString(R.string.error_weather_api), Snackbar.LENGTH_LONG).show();
+    }
+
+    private void updateUI(Weather currentWeather) {
+        requireActivity().runOnUiThread(() -> updateWeatherDetailsLayout(currentWeather));
     }
 
     private Bitmap retrieveWeatherImage(String imageName) {
@@ -129,7 +140,25 @@ public class WeatherFragment extends Fragment {
         return null;
     }
 
-    private void getWeatherDataFromJson(JSONObject json, Weather.WeatherBuilder currentWeatherBuilder) throws JSONException {
+    private void processWindJson(JSONObject json, Weather.WeatherBuilder currentWeatherBuilder) throws JSONException {
+        if (json.has("wind")) {
+            JSONObject wind = json.getJSONObject("wind");
+            currentWeatherBuilder.wind(Integer.toString(wind.getInt("speed")));
+            currentWeatherBuilder.windDirection(wind.getDouble("deg"));
+        }
+    }
+
+    private void processWeatherJson(JSONObject json, Weather.WeatherBuilder currentWeatherBuilder) throws JSONException {
+        if (json.has("weather")) {
+            JSONArray weatherArray = json.getJSONArray("weather");
+            if (weatherArray.length() > 0) {
+                JSONObject weather = weatherArray.getJSONObject(0);
+                currentWeatherBuilder.icon(retrieveWeatherImage(weather.getString("icon")));
+            }
+        }
+    }
+
+    private void processMainJson(JSONObject json, Weather.WeatherBuilder currentWeatherBuilder) throws JSONException {
         if (json.has("main")) {
             JSONObject main = json.getJSONObject("main");
             currentWeatherBuilder.temp(Integer.toString(main.getInt("temp") - 273));
@@ -138,21 +167,8 @@ public class WeatherFragment extends Fragment {
             currentWeatherBuilder.minTemp(Integer.toString(main.getInt("temp_min") - 273));
             currentWeatherBuilder.humidity(Integer.toString(main.getInt("humidity")));
         }
-
-        if (json.has("weather")) {
-            JSONArray weatherArray = json.getJSONArray("weather");
-            if (weatherArray.length() > 0) {
-                JSONObject weather = weatherArray.getJSONObject(0);
-                currentWeatherBuilder.icon(retrieveWeatherImage(weather.getString("icon")));
-            }
-        }
-
-        if (json.has("wind")) {
-            JSONObject wind = json.getJSONObject("wind");
-            currentWeatherBuilder.wind(Integer.toString(wind.getInt("speed")));
-            currentWeatherBuilder.windDirection(wind.getDouble("deg"));
-        }
     }
+
     private void updateWeatherDetailsLayout(Weather currentWeather) {
         binding.weatherDetailsLinearLayout.setVisibility(View.VISIBLE);
         binding.locationText.setText(currentWeather.getLocation());
