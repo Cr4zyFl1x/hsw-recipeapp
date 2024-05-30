@@ -2,6 +2,13 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.HSWCookbook" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
+
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primaryVariant</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:windowBackground">@color/darkBackground</item>
+        <item name="android:fontFamily">@font/comfortaa_light</item>
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
+    <color name="vegetarian">#46c010</color>
 </resources>

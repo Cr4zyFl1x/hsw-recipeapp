@@ -1,5 +1,6 @@
 plugins {
-    alias(libs.plugins.android.application)
+    id("com.android.application")
+    id("androidx.navigation.safeargs")
 }
 
 android {
@@ -38,6 +39,8 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+    implementation(libs.legacy.support.v4)
+    implementation(libs.recyclerview)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
