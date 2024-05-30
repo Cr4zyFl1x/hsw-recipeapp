@@ -3,20 +3,11 @@ Für eine funktionierende Wetter-Abfrage, muss ein persönlicher API-Key hinzuge
 
 Schritt 1: Erstelle einen API-Key auf der Website von [OpenWeather](https://home.openweathermap.org/api_keys).  
 
-Schritt 2: Kopiere den Key und füge ihn in die local.properties folgendermaßen ein:
+Schritt 2: Kopiere den Key und erstelle eine neue Datei keys.xml unter res/values. Fülle Sie nun so wie in der sample_keys.xml.
 ```bash
-API_KEY="hier den Key einfügen"
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="weather_api_key">hier kommt dein api key hin</string>
+</resources>
 ```
-
-Schritt 3: Gehe in die build.gradle.kts (Module:app). Ggf. musst du noch unter buildFeatures 
-```bash
-buildConfig = true
-```
-hinzufügen. Es sollte dann folgendermaßen aussehen:
-```bash
-buildFeatures {
-        viewBinding = true
-        buildConfig = true
-}
-```
-Schritt 4: Lasse das Projekt einmal synchroniseren und baue es dann neu. Nun sollte deine eine BuildConfig.java aktualisiert worden sein und du kannst deinen API-Key dort finden.
+Schritt 3: Lasse das Projekt einmal synchroniseren und baue es dann neu. Nun sollte deine eine BuildConfig.java aktualisiert worden sein und du kannst deinen API-Key dort finden.
