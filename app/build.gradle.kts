@@ -1,7 +1,6 @@
-import java.util.Properties
-
 plugins {
     alias(libs.plugins.android.application)
+
 }
 
 android {
@@ -16,19 +15,6 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        //load the values from .properties file
-        val keystoreFile = project.rootProject.file("local.properties")
-        val properties = Properties()
-        properties.load(keystoreFile.inputStream())
-
-        //return empty key in case something goes wrong
-        val apiKey = properties.getProperty("API_KEY") ?: ""
-
-        buildConfigField(
-                type = "String",
-                name = "API_KEY",
-                value = apiKey
-        )
     }
 
     buildTypes {
@@ -43,7 +29,6 @@ android {
     }
     buildFeatures {
         viewBinding = true
-        buildConfig = true
     }
 }
 
@@ -54,7 +39,7 @@ dependencies {
     implementation(libs.constraintlayout)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
-    implementation(libs.play.services.location)
+    implementation(libs.play.services)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
