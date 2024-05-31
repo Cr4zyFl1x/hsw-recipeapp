@@ -73,6 +73,19 @@ public class ShoppingListItemDatabaseOpenHelper extends DatabaseOpenHelper<Shopp
         }
     }
 
+    public Cursor findByIdGetCursor(int id)
+    {
+        try (final Cursor cursor = getReadableDatabase().query(DBInfo.TABLE_SHOPPINGLISTITEM,
+                new String[]{"_id", "title", "done"},
+                "_id = " + id,
+                null,
+                null,
+                null,
+                null)) {
+            return cursor;
+        }
+    }
+
 
     /**
      * {@inheritDoc}
@@ -126,5 +139,37 @@ public class ShoppingListItemDatabaseOpenHelper extends DatabaseOpenHelper<Shopp
                 null)) {
             return cursor.moveToNext();
         }
+    }
+
+    public List<ShoppingListItemEntity> getAllEntriesOfType (boolean active) {
+
+
+
+        try (final Cursor cursor = getReadableDatabase().query(DBInfo.TABLE_SHOPPINGLISTITEM,
+                new String[]{"_id", "title", "done"},
+                null,
+                null,
+                null,
+                null,
+                null)) {
+            final List<ShoppingListItemEntity> list = new ArrayList<>();
+            while (cursor.moveToNext()) {
+                list.add(new ShoppingListItemEntity(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getInt(2) == 1));
+            }
+            return list;
+        }
+    }
+
+    public Cursor selectCursor() {
+        return getReadableDatabase().query(DBInfo.TABLE_SHOPPINGLISTITEM,
+                new String[]{"_id", "title", "done"},
+                null,
+                null,
+                null,
+                null,
+                null);
     }
 }

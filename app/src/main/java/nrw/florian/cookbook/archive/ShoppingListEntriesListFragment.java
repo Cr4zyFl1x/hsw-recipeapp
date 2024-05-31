@@ -1,4 +1,4 @@
-package nrw.florian.cookbook;
+package nrw.florian.cookbook.archive;
 
 import android.database.Cursor;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import nrw.florian.cookbook.ShoppingListEntry;
 import nrw.florian.cookbook.adapter.ActiveEntriesRecyclerViewAdapter;
 import nrw.florian.cookbook.databinding.FragmentShoppingListItemBinding;
 

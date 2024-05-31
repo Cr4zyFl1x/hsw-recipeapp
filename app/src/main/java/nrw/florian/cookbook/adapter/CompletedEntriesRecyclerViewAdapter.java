@@ -41,7 +41,15 @@ public class CompletedEntriesRecyclerViewAdapter extends RecyclerView.Adapter<Co
         holder.checkBox.setChecked(true);
         holder.textView.setText(entries.get(position).getName());
 
-        updateStrikeThrough(holder.textView);
+        makeStrikethrough(holder.textView, true);
+
+        holder.checkBox.setOnClickListener(v -> {
+            if (!holder.checkBox.isChecked()) {
+                makeStrikethrough(holder.textView, false);
+            }
+        });
+
+
     }
 
     @Override
@@ -71,7 +79,11 @@ public class CompletedEntriesRecyclerViewAdapter extends RecyclerView.Adapter<Co
         }
     }
 
-    private void updateStrikeThrough(TextView textView) {
-        textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+    public static void makeStrikethrough(TextView textView, boolean isChecked) {
+        if (isChecked) {
+            textView.setPaintFlags(textView.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        } else {
+            textView.setPaintFlags(textView.getPaintFlags() & ~Paint.STRIKE_THRU_TEXT_FLAG);
+        }
     }
 }

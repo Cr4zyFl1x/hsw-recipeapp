@@ -1,14 +1,16 @@
 package nrw.florian.cookbook.fragment.view;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import nrw.florian.cookbook.R;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+
+import nrw.florian.cookbook.databinding.FragmentEntryBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +27,8 @@ public class EntryFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    FragmentEntryBinding binding;
 
     public EntryFragment() {
         // Required empty public constructor
@@ -60,7 +64,17 @@ public class EntryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        binding = FragmentEntryBinding.inflate(inflater, container, false);
+        return binding.getRoot();
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_entry, container, false);
+//        return inflater.inflate(R.layout.fragment_entry, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        binding.shoppingListMenuButton.setOnClickListener(v -> {
+            NavHostFragment.findNavController(EntryFragment.this).navigate(EntryFragmentDirections.actionEntryFragmentToShoppingListFragment());
+        });
     }
 }
