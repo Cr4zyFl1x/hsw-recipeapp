@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/recipe_add"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@+id/recipeOverviewMenuButton"
         app:layout_constraintStart_toStartOf="@+id/recipeOverviewMenuButton"
         app:layout_constraintTop_toBottomOf="@+id/recipeOverviewMenuButton" />
@@ -58,6 +59,7 @@
         app:layout_constraintTop_toBottomOf="@+id/shoppingListMenuButton" />
 
     <LinearLayout
+        android:id="@+id/weatherContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
@@ -68,8 +70,8 @@
 
         <ImageView
             android:id="@+id/menuWeatherIconImageView"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@drawable/cloudy_sun_placeholder"
             app:srcCompat="@drawable/cloudy_sun_placeholder"
             tools:srcCompat="@drawable/cloudy_sun_placeholder" />
@@ -84,7 +86,7 @@
                 android:id="@+id/menuWeatherLocationTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hamelin"
+                android:text="Lade ..."
                 android:textAlignment="viewStart"
                 android:textStyle="bold" />
 
@@ -93,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="20 °C"
+                android:text="Lade ..."
                 android:textColor="@color/gray" />
         </LinearLayout>
 

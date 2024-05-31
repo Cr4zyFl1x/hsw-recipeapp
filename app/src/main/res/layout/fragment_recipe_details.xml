@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".fragment.view.RecipeDetailsFragment" >
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        android:src="@android:drawable/ic_menu_edit"
+        android:tint="@color/white"
+        app:backgroundTint="@color/primary"
+        app:rippleColor="@color/white" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -67,14 +80,15 @@
                         android:id="@+id/recipeDifficultyTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Leicht" />
+                        android:text="Leicht"
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/textView952"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/difficulty"
-                        android:textSize="12sp" />
+                        android:textSize="10sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -107,14 +121,15 @@
                         android:id="@+id/recipeTimeTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="40 min." />
+                        android:text="40 min."
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/textView962"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/work_time"
-                        android:textSize="12sp" />
+                        android:textSize="10sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -147,14 +162,15 @@
                         android:id="@+id/recipeEnergyTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="1.590 kcal" />
+                        android:text="1.590 kcal"
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/textView972"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/energy"
-                        android:textSize="12sp" />
+                        android:textSize="10sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -166,6 +182,7 @@
                 android:layout_marginTop="24dp"
                 android:text="@string/ingredients"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/recipeTitleTextView"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout95" />
 
@@ -173,7 +190,7 @@
                 android:id="@+id/putOnShoppingListButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/put_on_shopping_list"
                 app:icon="@drawable/icon_shopping_basket"
                 app:layout_constraintEnd_toEndOf="@+id/recipeIngredientsRecyclerView"
@@ -221,7 +238,8 @@
                 app:layout_constraintEnd_toEndOf="@+id/recipePictureImageView"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textView8"
-                app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                app:layout_constraintTop_toBottomOf="@+id/textView8"
+                tools:listitem="@layout/fragment_recipe_ingredient_item" />
 
             <TextView
                 android:id="@+id/textView14"
@@ -230,6 +248,7 @@
                 android:layout_marginTop="24dp"
                 android:text="@string/making"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/recipeIngredientsRecyclerView"
                 app:layout_constraintTop_toBottomOf="@+id/putOnShoppingListButton" />
 
