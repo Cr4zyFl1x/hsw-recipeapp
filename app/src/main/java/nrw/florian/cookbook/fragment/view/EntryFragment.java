@@ -208,7 +208,7 @@ public class EntryFragment extends Fragment {
      */
     private synchronized void updateWeatherData(final Location loc)
     {
-        final OpenWeatherMapAPIClient client = OpenWeatherMapAPIClient.createAPIClient(getString(R.string.owm_api_key));
+        final OpenWeatherMapAPIClient client = OpenWeatherMapAPIClient.createAPIClient(getString(R.string.weather_api_key));
         new Thread(() -> {
             lastWeatherData = client.getCurrentWeather(loc.getLatitude(), loc.getLongitude());
             updateWeatherContainer(lastWeatherData);
