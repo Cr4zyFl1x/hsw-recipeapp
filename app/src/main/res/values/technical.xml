@@ -2,6 +2,6 @@
 <resources>
 
     <!-- // OpenWeatherMap API key // -->
-    <string name="owm_api_key">%replace_api_key_owm%</string>
+    <string name="owm_api_key">b0efac20b3c867d1ecf5a5d4d6b10af4</string>
 
 </resources>

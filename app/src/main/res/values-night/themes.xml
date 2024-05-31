@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/primaryVariant</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnSecondary">@color/white</item>
         <item name="android:windowBackground">@color/darkBackground</item>
         <item name="android:fontFamily">@font/comfortaa_light</item>
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
