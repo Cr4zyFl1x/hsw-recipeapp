@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <!-- // OpenWeatherMap API key // -->
-    <string name="owm_api_key">%replace_with_your_owm_api_key%</string>
-
-</resources>
