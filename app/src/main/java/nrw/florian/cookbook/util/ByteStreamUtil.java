@@ -6,6 +6,10 @@ import android.graphics.BitmapFactory;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+
+/**
+ * @author Florian J. Kleine-Vorholt
+ */
 public class ByteStreamUtil {
 
     /**
@@ -20,6 +24,7 @@ public class ByteStreamUtil {
         }
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
+
 
     /**
      * Converts a bitmap to a byte array.
