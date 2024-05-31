@@ -21,10 +21,16 @@ import nrw.florian.cookbook.util.ByteStreamUtil;
  */
 public class RecipeDatabaseOpenHelper extends DatabaseOpenHelper<RecipeEntity> {
 
+
+    /**
+     * Creates a new database helper
+     * @param context Context
+     */
     public RecipeDatabaseOpenHelper(Context context)
     {
         super(context, null, 1);
     }
+
 
 
     /**
@@ -125,7 +131,7 @@ public class RecipeDatabaseOpenHelper extends DatabaseOpenHelper<RecipeEntity> {
                 rcdoh.saveOrUpdate(eh);
             });
         }
-        return id != 1;
+        return id != -1;
     }
 
 

@@ -16,8 +16,13 @@ import androidx.annotation.Nullable;
  *
  * @author Florian J. Kleine-Vorholt
  */
-public abstract class DatabaseOpenHelper<T> extends SQLiteOpenHelper implements BasicDatabaseOperations<T> {
+public abstract class DatabaseOpenHelper<T>
+        extends SQLiteOpenHelper
+        implements BasicDatabaseOperations<T> {
 
+    /**
+     * Context to use for locating paths to the the database.
+     */
     private final Context context;
 
 

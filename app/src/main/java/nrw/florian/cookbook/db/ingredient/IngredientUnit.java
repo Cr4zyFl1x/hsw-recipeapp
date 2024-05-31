@@ -3,11 +3,12 @@ package nrw.florian.cookbook.db.ingredient;
 import android.content.Context;
 
 import nrw.florian.cookbook.R;
+import nrw.florian.cookbook.api.iface.StringResource;
 
 /**
  * @author Florian J. Kleine-Vorholt
  */
-public enum IngredientUnit {
+public enum IngredientUnit implements StringResource {
 
     GRAMS (R.string.us_grams),
     KILOGRAMS (R.string.us_kilograms),
@@ -45,12 +46,11 @@ public enum IngredientUnit {
 
 
     /**
-     * Resolves the string value for the resource id
-     * @param ctx Context to get the string value from
-     * @return The String value for the unit
+     * {@inheritDoc}
      */
-    public String getUnit(final Context ctx)
+    @Override
+    public String getString(Context context)
     {
-        return ctx.getString(getId());
+        return context.getString(getId());
     }
 }

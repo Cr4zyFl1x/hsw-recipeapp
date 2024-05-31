@@ -16,7 +16,10 @@ import nrw.florian.cookbook.db.DatabaseOpenHelper;
  */
 public class ShoppingListItemDatabaseOpenHelper extends DatabaseOpenHelper<ShoppingListItemEntity> {
 
-
+    /**
+     * Creates a new instance of {@link ShoppingListItemDatabaseOpenHelper}.
+     * @param context the context in which to open the database
+     */
     public ShoppingListItemDatabaseOpenHelper(Context context)
     {
         super(context, null, 1);
