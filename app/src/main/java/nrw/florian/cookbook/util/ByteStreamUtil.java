@@ -17,7 +17,7 @@ public class ByteStreamUtil {
      * @param bytes byte array to be converted
      * @return Bitmap image from the byte array
      */
-    public static Bitmap byte2Bitmap(byte[] bytes)
+    public static Bitmap byteToBitmap(byte[] bytes)
     {
         if (bytes == null || bytes.length == 0) {
             return null;
@@ -31,7 +31,7 @@ public class ByteStreamUtil {
      * @param bitmap bitmap to be converted
      * @return byte array from the bitmap
      */
-    public static byte[] bitmap2Byte(Bitmap bitmap)
+    public static byte[] bitmapToByte(Bitmap bitmap)
     {
         if (bitmap == null) {
             return null;

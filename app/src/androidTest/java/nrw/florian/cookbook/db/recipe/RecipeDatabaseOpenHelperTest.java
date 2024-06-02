@@ -15,7 +15,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import nrw.florian.cookbook.AndroidContextTest;
 import nrw.florian.cookbook.R;
 import nrw.florian.cookbook.db.ingredient.IngredientEntity;
 import nrw.florian.cookbook.db.ingredient.IngredientUnit;
