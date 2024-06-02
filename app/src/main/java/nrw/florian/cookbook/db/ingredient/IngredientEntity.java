@@ -97,4 +97,6 @@ public class IngredientEntity {
     public void setRecipeID(int recipeID) {
         this.recipeID = recipeID;
     }
+
+    public String toString() { return quantity + " " + unit + " " + name; }
 }

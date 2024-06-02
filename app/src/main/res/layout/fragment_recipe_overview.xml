@@ -19,7 +19,7 @@
             android:text="Fleischhaltig"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/searchText" />
 
         <CheckBox
             android:id="@+id/warmCheckBox"
@@ -69,26 +69,38 @@
             app:layout_constraintStart_toStartOf="@+id/coldCheckBox"
             app:layout_constraintTop_toTopOf="@id/categorySpinner" />
 
-        <LinearLayout
-            android:layout_width="409dp"
-            android:layout_height="660dp"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="108dp"
-            android:layout_marginEnd="1dp"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/diffcultySpinner"></LinearLayout>
-
         <Button
             android:id="@+id/searchButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Suchen"
-            app:layout_constraintStart_toStartOf="@id/diffcultySpinner"
+            app:layout_constraintEnd_toEndOf="@+id/diffcultySpinner"
+            app:layout_constraintStart_toStartOf="@+id/categorySpinner"
             app:layout_constraintTop_toBottomOf="@id/diffcultySpinner" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="409dp"
+            android:layout_height="532dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/vegetrainCheckBox"
+            app:layout_constraintTop_toBottomOf="@+id/searchButton" />
+
+        <EditText
+            android:id="@+id/searchText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:ems="10"
+            android:hint="@string/search_verb"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="@+id/warmCheckBox"
+            app:layout_constraintStart_toStartOf="@+id/meatCheckBox"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

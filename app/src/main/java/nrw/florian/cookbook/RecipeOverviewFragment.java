@@ -1,64 +1,127 @@
 package nrw.florian.cookbook;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Spinner;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link RecipeOverviewFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import nrw.florian.cookbook.db.recipe.RecipeBaseCategory;
+import nrw.florian.cookbook.db.recipe.RecipeDatabaseOpenHelper;
+import nrw.florian.cookbook.db.recipe.RecipeDifficulty;
+import nrw.florian.cookbook.db.recipe.RecipeEntity;
+import nrw.florian.cookbook.db.recipeproperty.RecipeProperty;
+
 public class RecipeOverviewFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private List<RecipeEntity> recipes;
+    private List<RecipeEntity> filteredRecipes;
+    private RecyclerView recyclerView;
+    private RecipeAdapter adapter;
+    private Spinner categorySpinner;
+    private Spinner difficultySpinner;
+    private CheckBox meatCheckBox;
+    private CheckBox vegetarianCheckBox;
+    private CheckBox coldCheckBox;
+    private CheckBox warmCheckBox;
+    private EditText searchText;
+    private Button searchButton;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public RecipeOverviewFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment RecipeOverviewFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static RecipeOverviewFragment newInstance(String param1, String param2) {
-        RecipeOverviewFragment fragment = new RecipeOverviewFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_recipe_overview, container, false);
+
+        // Initialize RecyclerView
+        recyclerView = rootView.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // Initialize adapter with an empty list initially
+        adapter = new RecipeAdapter(new ArrayList<>());
+        recyclerView.setAdapter(adapter);
+
+        // Initialize Spinners
+        categorySpinner = rootView.findViewById(R.id.categorySpinner);
+        difficultySpinner = rootView.findViewById(R.id.diffcultySpinner);
+
+        // Initialize CheckBoxes
+        meatCheckBox = rootView.findViewById(R.id.meatCheckBox);
+        vegetarianCheckBox = rootView.findViewById(R.id.vegetrainCheckBox);
+        coldCheckBox = rootView.findViewById(R.id.coldCheckBox);
+        warmCheckBox = rootView.findViewById(R.id.warmCheckBox);
+
+        // Initialize search text
+        searchText = rootView.findViewById(R.id.searchText);
+
+        // Initialize search button
+        searchButton = rootView.findViewById(R.id.searchButton);
+
+        // Set spinners for the category
+        RecipeBaseCategory[] categoryOptions = RecipeBaseCategory.values();
+        ArrayAdapter<RecipeBaseCategory> categoryAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, categoryOptions);
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categorySpinner.setAdapter(categoryAdapter);
+
+        // Set spinners for the difficulty
+        RecipeDifficulty[] difficultyOptions = RecipeDifficulty.values();
+        ArrayAdapter<RecipeDifficulty> difficultyAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, difficultyOptions);
+        difficultyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        difficultySpinner.setAdapter(difficultyAdapter);
+
+        // Load recipes from database
+        loadRecipesFromDatabase();
+
+        // Add listener for the search button
+        searchButton.setOnClickListener(v -> filterRecipes());
+
+        return rootView;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recipe_overview, container, false);
+    private void loadRecipesFromDatabase() {
+        // Create an instance of RecipeDatabaseOpenHelper
+        RecipeDatabaseOpenHelper dbHelper = new RecipeDatabaseOpenHelper(getContext());
+
+        // Fetch recipes from the database using the findAll() method
+        recipes = dbHelper.findAll();
+
+        // Set the fetched recipes to the adapter and the filtered list
+        filteredRecipes = new ArrayList<>(recipes);
+        adapter.setRecipes(filteredRecipes);
+    }
+
+    private void filterRecipes() {
+        RecipeBaseCategory selectedCategory = (RecipeBaseCategory) categorySpinner.getSelectedItem();
+        RecipeDifficulty selectedDifficulty = (RecipeDifficulty) difficultySpinner.getSelectedItem();
+        boolean isMeatChecked = meatCheckBox.isChecked();
+        boolean isVegetarianChecked = vegetarianCheckBox.isChecked();
+        boolean isColdChecked = coldCheckBox.isChecked();
+        boolean isWarmChecked = warmCheckBox.isChecked();
+        String searchTextString = searchText.getText().toString().trim().toLowerCase();
+
+        filteredRecipes = recipes.stream()
+                .filter(recipe -> (selectedCategory == null || recipe.getCategory() == selectedCategory) &&
+                        (selectedDifficulty == null || recipe.getDifficulty() == selectedDifficulty) &&
+                        (!isMeatChecked || recipe.getRecipeProperties().contains(RecipeProperty.MEAT)) &&
+                        (!isVegetarianChecked || recipe.getRecipeProperties().contains(RecipeProperty.VEGETARIAN)) &&
+                        (!isColdChecked || recipe.getRecipeProperties().contains(RecipeProperty.COLD)) &&
+                        (!isWarmChecked || recipe.getRecipeProperties().contains(RecipeProperty.WARM)) &&
+                        (searchTextString.isEmpty() || recipe.getTitle().toLowerCase().contains(searchTextString)))
+                .collect(Collectors.toList());
+
+        adapter.setRecipes(filteredRecipes);
     }
 }
