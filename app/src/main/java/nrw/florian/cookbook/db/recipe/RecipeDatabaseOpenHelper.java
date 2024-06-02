@@ -82,7 +82,7 @@ public class RecipeDatabaseOpenHelper extends DatabaseOpenHelper<RecipeEntity> {
         // DATA
         final ContentValues values = new ContentValues();
         values.put("title", entity.getTitle());
-        values.put("image", ByteStreamUtil.bitmap2Byte(entity.getImage()));
+        values.put("image", ByteStreamUtil.bitmapToByte(entity.getImage()));
         values.put("defaultServings", entity.getDefaultServings());
         values.put("instructions", entity.getInstructions());
         values.put("category", entity.getCategory().name());
@@ -97,16 +97,16 @@ public class RecipeDatabaseOpenHelper extends DatabaseOpenHelper<RecipeEntity> {
                     "_id = " + entity.getId(), null);
 
             // UPDATE INGREDIENTS
-            try (final IngredientDatabaseOpenHelper idoh = new IngredientDatabaseOpenHelper(getContext())) {
-                idoh.removeAllForRecipe(entity);
+            try (final IngredientDatabaseOpenHelper helper = new IngredientDatabaseOpenHelper(getContext())) {
+                helper.removeAllForRecipe(entity);
                 entity.getIngredients().forEach(j -> j.setRecipeID(entity.getId()));
-                idoh.saveOrUpdate(entity.getIngredients());
+                helper.saveOrUpdate(entity.getIngredients());
             }
             // UPDATE PROPS
-            try (final RecipePropertyDatabaseOpenHelper rcdoh = new RecipePropertyDatabaseOpenHelper(getContext())) {
-                rcdoh.removeAllForRecipe(entity);
+            try (final RecipePropertyDatabaseOpenHelper helper = new RecipePropertyDatabaseOpenHelper(getContext())) {
+                helper.removeAllForRecipe(entity);
                 entity.getRecipePropertyEntities().forEach(j -> j.setRecipeID(entity.getId()));
-                rcdoh.saveOrUpdate(entity.getRecipePropertyEntities());
+                helper.saveOrUpdate(entity.getRecipePropertyEntities());
             }
 
             return rows == 1;
@@ -117,18 +117,18 @@ public class RecipeDatabaseOpenHelper extends DatabaseOpenHelper<RecipeEntity> {
         entity.setId((int) id);
 
         // INSERT INGREDIENTS
-        try (final IngredientDatabaseOpenHelper idoh = new IngredientDatabaseOpenHelper(getContext())) {
-            entity.getIngredients().forEach(eh -> {
-                eh.setRecipeID((int) id);
-                idoh.saveOrUpdate(eh);
+        try (final IngredientDatabaseOpenHelper ingredientHelper = new IngredientDatabaseOpenHelper(getContext())) {
+            entity.getIngredients().forEach(ingredient -> {
+                ingredient.setRecipeID((int) id);
+                ingredientHelper.saveOrUpdate(ingredient);
             });
         }
 
         // INSERT PROPERTIES
-        try (final RecipePropertyDatabaseOpenHelper rcdoh = new RecipePropertyDatabaseOpenHelper(getContext())) {
-            entity.getRecipePropertyEntities().forEach(eh -> {
-                eh.setRecipeID((int) id);
-                rcdoh.saveOrUpdate(eh);
+        try (final RecipePropertyDatabaseOpenHelper propertyHelper = new RecipePropertyDatabaseOpenHelper(getContext())) {
+            entity.getRecipePropertyEntities().forEach(prop -> {
+                prop.setRecipeID((int) id);
+                propertyHelper.saveOrUpdate(prop);
             });
         }
         return id != -1;
@@ -141,10 +141,10 @@ public class RecipeDatabaseOpenHelper extends DatabaseOpenHelper<RecipeEntity> {
     @Override
     public boolean remove(RecipeEntity entity)
     {
-        try (RecipePropertyDatabaseOpenHelper rp = new RecipePropertyDatabaseOpenHelper(getContext());
-        IngredientDatabaseOpenHelper ig = new IngredientDatabaseOpenHelper(getContext())) {
-            rp.removeAllForRecipe(entity);
-            ig.removeAllForRecipe(entity);
+        try (RecipePropertyDatabaseOpenHelper recipeHelper = new RecipePropertyDatabaseOpenHelper(getContext());
+        IngredientDatabaseOpenHelper ingredientHelper = new IngredientDatabaseOpenHelper(getContext())) {
+            recipeHelper.removeAllForRecipe(entity);
+            ingredientHelper.removeAllForRecipe(entity);
         }
         return getWritableDatabase()
                 .delete(DBInfo.TABLE_RECIPE,
@@ -194,7 +194,7 @@ public class RecipeDatabaseOpenHelper extends DatabaseOpenHelper<RecipeEntity> {
         return new RecipeEntity(
                 cursor.getInt(0),
                 cursor.getString(1),
-                ByteStreamUtil.byte2Bitmap(cursor.getBlob(2)),
+                ByteStreamUtil.byteToBitmap(cursor.getBlob(2)),
                 cursor.getInt(3),
                 cursor.getString(4),
                 RecipeBaseCategory.valueOf(cursor.getString(5)),
