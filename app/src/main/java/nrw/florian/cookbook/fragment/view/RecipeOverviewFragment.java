@@ -1,4 +1,4 @@
-package nrw.florian.cookbook;
+package nrw.florian.cookbook.fragment.view;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,11 +20,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import nrw.florian.cookbook.R;
 import nrw.florian.cookbook.db.recipe.RecipeBaseCategory;
 import nrw.florian.cookbook.db.recipe.RecipeDatabaseOpenHelper;
 import nrw.florian.cookbook.db.recipe.RecipeDifficulty;
 import nrw.florian.cookbook.db.recipe.RecipeEntity;
 import nrw.florian.cookbook.db.recipeproperty.RecipeProperty;
+import nrw.florian.cookbook.fragment.adapter.RecipeAdapter;
 
 public class RecipeOverviewFragment extends Fragment {
 

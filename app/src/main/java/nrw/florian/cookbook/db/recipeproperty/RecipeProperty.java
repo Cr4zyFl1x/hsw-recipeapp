@@ -2,6 +2,9 @@ package nrw.florian.cookbook.db.recipeproperty;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
+import nrw.florian.cookbook.MainActivity;
 import nrw.florian.cookbook.R;
 import nrw.florian.cookbook.api.iface.StringResource;
 
@@ -49,5 +52,11 @@ public enum RecipeProperty implements StringResource {
     public String getString(Context ctx)
     {
         return ctx.getString(getId());
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return getString(MainActivity.getContext());
     }
 }

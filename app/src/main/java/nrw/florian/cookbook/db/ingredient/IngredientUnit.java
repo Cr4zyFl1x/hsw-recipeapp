@@ -60,6 +60,6 @@ public enum IngredientUnit implements StringResource {
     @NonNull
     @Override
     public String toString() {
-        return getUnit(MainActivity.getContext());
+        return getString(MainActivity.getContext());
     }
 }

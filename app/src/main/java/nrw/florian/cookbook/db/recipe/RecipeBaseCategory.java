@@ -2,6 +2,9 @@ package nrw.florian.cookbook.db.recipe;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
+import nrw.florian.cookbook.MainActivity;
 import nrw.florian.cookbook.R;
 
 /**
@@ -61,5 +64,11 @@ public enum RecipeBaseCategory {
     public String getString(final Context context)
     {
         return context.getString(getResourceId());
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return getString(MainActivity.getContext());
     }
 }

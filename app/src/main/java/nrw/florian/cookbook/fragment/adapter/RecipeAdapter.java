@@ -1,7 +1,5 @@
-package nrw.florian.cookbook;
+package nrw.florian.cookbook.fragment.adapter;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import nrw.florian.cookbook.R;
 import nrw.florian.cookbook.db.recipe.RecipeEntity;
 import nrw.florian.cookbook.db.recipeproperty.RecipeProperty;
-import nrw.florian.cookbook.util.ByteStreamUtil;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
 

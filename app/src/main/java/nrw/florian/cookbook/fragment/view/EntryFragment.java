@@ -157,6 +157,9 @@ public class EntryFragment extends Fragment {
         binding.recipeOverviewMenuButton.setOnClickListener((v) -> NavHostFragment.findNavController(this)
                 .navigate(EntryFragmentDirections.actionEntryFragmentToRecipeOverviewFragment()));
 
+        binding.addRecipeMenuButton.setOnClickListener(v -> NavHostFragment.findNavController(this)
+                .navigate(EntryFragmentDirections.actionEntryFragmentToEditRecipeFragment()));
+
         binding.shoppingListMenuButton.setOnClickListener((v) -> NavHostFragment.findNavController(this)
                 .navigate(EntryFragmentDirections.actionEntryFragmentToShoppingListFragment()));
     }
