@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import nrw.florian.cookbook.R;
@@ -21,7 +20,7 @@ import nrw.florian.cookbook.viewModel.ShoppingListViewModel;
 public class ShoppingListRecyclerViewAdapter extends RecyclerView.Adapter<ShoppingListRecyclerViewAdapter.ShoppingListViewHolder> {
     private List<ShoppingListItemEntity> items;
     ShoppingListViewModel viewModel;
-    private boolean isDone;
+    private final boolean isDone;
 
     public ShoppingListRecyclerViewAdapter(List<ShoppingListItemEntity> items, ShoppingListViewModel viewModel, boolean isDone) {
         super();
@@ -61,9 +60,7 @@ public class ShoppingListRecyclerViewAdapter extends RecyclerView.Adapter<Shoppi
                 viewModel.upsert(item);
             });
         }
-        holder.imageButton.setOnClickListener(v -> {
-            viewModel.delete(item);
-        });
+        holder.imageButton.setOnClickListener(v -> viewModel.delete(item));
     }
 
     @Override
@@ -85,12 +82,6 @@ public class ShoppingListRecyclerViewAdapter extends RecyclerView.Adapter<Shoppi
 
     public void setItems(List<ShoppingListItemEntity> items) {
         this.items = items;
-        notifyDataSetChanged();
-    }
-
-    public void addItems(List<ShoppingListItemEntity> items) {
-        List<ShoppingListItemEntity> newList = new ArrayList<>();
-        this.items.addAll(items);
         notifyDataSetChanged();
     }
 

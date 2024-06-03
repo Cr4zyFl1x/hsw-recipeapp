@@ -77,19 +77,6 @@ public class ShoppingListItemDatabaseOpenHelper extends DatabaseOpenHelper<Shopp
         }
     }
 
-    public Cursor findByIdGetCursor(int id)
-    {
-        try (final Cursor cursor = getReadableDatabase().query(DBInfo.TABLE_SHOPPINGLISTITEM,
-                new String[]{"_id", "title", "done"},
-                "_id = " + id,
-                null,
-                null,
-                null,
-                null)) {
-            return cursor;
-        }
-    }
-
 
     /**
      * {@inheritDoc}
