@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/recipeItemContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="16dp">
 
-    <ImageView
-        android:id="@+id/recipeImageView"
+    <FrameLayout
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:scaleType="centerCrop" />
+        android:layout_height="100dp">
+
+        <ImageView
+            android:id="@+id/recipeImageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical"
         android:paddingStart="16dp">
@@ -22,33 +28,36 @@
             android:id="@+id/recipeNameTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Recipe Name"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:text="Recipe Name" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/recipePropertiesTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:text="Properties will be displayed here"
             android:textColor="@android:color/darker_gray"
-            android:text="Properties will be displayed here" />
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/recipeCategoryTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:text="Category will be displayed here"
             android:textColor="@android:color/darker_gray"
-            android:text="Category will be displayed here" />
+            android:textSize="14sp"
+            android:textStyle="bold|italic" />
 
         <TextView
             android:id="@+id/recipeDifficultyTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:text="Difficulty will be displayed here"
             android:textColor="@android:color/darker_gray"
-            android:text="Difficulty will be displayed here" />
+            android:textSize="14sp"
+            android:textStyle="italic" />
     </LinearLayout>
 
 </LinearLayout>

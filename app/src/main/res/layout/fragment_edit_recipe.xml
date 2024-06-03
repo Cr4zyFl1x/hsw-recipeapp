@@ -76,17 +76,17 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ingredientLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                app:layout_constraintTop_toBottomOf="@id/quantityTextInput"
-                app:layout_constraintStart_toStartOf="@id/quantityTextInput"
-                app:layout_constraintEnd_toEndOf="@id/typeOfQuantitySpinner">
+            android:id="@+id/ingredientLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/typeOfQuantitySpinner"
+            app:layout_constraintStart_toStartOf="@+id/quantityTextInput"
+            app:layout_constraintTop_toBottomOf="@+id/quantityTextInput">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/ingredientTextInput"
-                android:layout_width="195dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Zutat" />
 
@@ -105,27 +105,21 @@
                 app:layout_constraintStart_toEndOf="@id/typeOfQuantitySpinner"/>
 
 
-
-
-
-
-
-
-
         <LinearLayout
             android:id="@+id/safedIngriedientsLinearLayout"
-            android:layout_width="403dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/ingredientLayout"
-            app:layout_constraintStart_toStartOf="@id/ingredientLayout"/>
+            app:layout_constraintStart_toStartOf="@id/ingredientLayout"
+            app:layout_constraintTop_toBottomOf="@id/ingredientLayout" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/recipeDescriptionLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="@+id/safedIngriedientsLinearLayout"
             app:layout_constraintStart_toStartOf="parent"

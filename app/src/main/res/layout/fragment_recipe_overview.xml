@@ -14,31 +14,31 @@
             android:id="@+id/meatCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:text="Fleischhaltig"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/searchText" />
+            app:layout_constraintStart_toStartOf="@+id/searchText"
+            app:layout_constraintTop_toBottomOf="@+id/searchText" />
 
         <CheckBox
             android:id="@+id/warmCheckBox"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
             android:text="Warm"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/meatCheckBox"
+            app:layout_constraintBottom_toBottomOf="@+id/meatCheckBox"
+            app:layout_constraintEnd_toEndOf="@+id/searchText"
             app:layout_constraintTop_toTopOf="@+id/meatCheckBox" />
 
         <CheckBox
             android:id="@+id/vegetrainCheckBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="Vegetarisch"
             android:textColor="@color/vegetarian"
             android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/meatCheckBox"
             app:layout_constraintStart_toStartOf="@+id/meatCheckBox"
             app:layout_constraintTop_toBottomOf="@+id/meatCheckBox" />
 
@@ -48,18 +48,21 @@
             android:layout_height="wrap_content"
             android:text="Kalt"
             android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/vegetrainCheckBox"
             app:layout_constraintEnd_toEndOf="@+id/warmCheckBox"
             app:layout_constraintStart_toStartOf="@+id/warmCheckBox"
-            app:layout_constraintTop_toBottomOf="@+id/warmCheckBox" />
+            app:layout_constraintTop_toTopOf="@+id/vegetrainCheckBox" />
+
 
         <Spinner
             android:id="@+id/categorySpinner"
-            android:layout_width="0dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/vegetrainCheckBox"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/diffcultySpinner"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/vegetrainCheckBox"
-            app:layout_constraintTop_toBottomOf="@+id/coldCheckBox" />
-
+            app:layout_constraintTop_toBottomOf="@+id/vegetrainCheckBox" />
 
         <Spinner
             android:id="@+id/diffcultySpinner"
@@ -67,40 +70,56 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="@+id/coldCheckBox"
             app:layout_constraintStart_toStartOf="@+id/coldCheckBox"
-            app:layout_constraintTop_toTopOf="@id/categorySpinner" />
+            app:layout_constraintTop_toTopOf="@+id/categorySpinner" />
 
         <Button
             android:id="@+id/searchButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="8dp"
             android:text="Suchen"
-            app:layout_constraintEnd_toEndOf="@+id/diffcultySpinner"
             app:layout_constraintStart_toStartOf="@+id/categorySpinner"
-            app:layout_constraintTop_toBottomOf="@id/diffcultySpinner" />
+            app:layout_constraintTop_toBottomOf="@+id/categorySpinner" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:layout_width="409dp"
-            android:layout_height="532dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginEnd="1dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/vegetrainCheckBox"
-            app:layout_constraintTop_toBottomOf="@+id/searchButton" />
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchButton"
+            app:layout_constraintVertical_bias="0.0" />
 
         <EditText
             android:id="@+id/searchText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:ems="10"
             android:hint="@string/search_verb"
             android:inputType="text"
-            app:layout_constraintEnd_toEndOf="@+id/warmCheckBox"
-            app:layout_constraintStart_toStartOf="@+id/meatCheckBox"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/resetFilterButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reset"
+            app:layout_constraintBottom_toBottomOf="@+id/searchButton"
+            app:layout_constraintEnd_toEndOf="@+id/diffcultySpinner"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/searchButton"
+            app:layout_constraintTop_toTopOf="@+id/searchButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

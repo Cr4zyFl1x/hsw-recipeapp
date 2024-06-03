@@ -4,18 +4,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import nrw.florian.cookbook.MainActivity;
 import nrw.florian.cookbook.R;
 import nrw.florian.cookbook.db.recipe.RecipeEntity;
 import nrw.florian.cookbook.db.recipeproperty.RecipeProperty;
+import nrw.florian.cookbook.fragment.view.RecipeOverviewFragment;
+import nrw.florian.cookbook.fragment.view.RecipeOverviewFragmentDirections;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
+
+    private Fragment fragment;
 
     private List<RecipeEntity> recipes;
 
@@ -23,10 +34,17 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         this.recipes = recipes;
     }
 
+    public void setSrcFrame(final Fragment fragment)
+    {
+        this.fragment = fragment;
+    }
+
     public void setRecipes(List<RecipeEntity> recipes) {
         this.recipes = recipes;
         notifyDataSetChanged(); // Notify the adapter about the changes
     }
+
+
 
     @NonNull
     @Override
@@ -46,20 +64,24 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         return recipes.size();
     }
 
-    public static class RecipeViewHolder extends RecyclerView.ViewHolder {
+    public class RecipeViewHolder extends RecyclerView.ViewHolder {
         private TextView recipeNameTextView;
         private TextView recipePropertiesTextView;
         private TextView recipeCategoryTextView;
         private TextView recipeDifficultyTextView;
         private ImageView recipeImageView; // ImageView hinzufügen
 
-        public RecipeViewHolder(@NonNull View itemView) {
+        private LinearLayout recipeItemContainer;
+
+        public RecipeViewHolder(@NonNull View itemView)
+        {
             super(itemView);
             recipeNameTextView = itemView.findViewById(R.id.recipeNameTextView);
             recipePropertiesTextView = itemView.findViewById(R.id.recipePropertiesTextView);
             recipeCategoryTextView = itemView.findViewById(R.id.recipeCategoryTextView);
             recipeDifficultyTextView = itemView.findViewById(R.id.recipeDifficultyTextView);
             recipeImageView = itemView.findViewById(R.id.recipeImageView); // ImageView initialisieren
+            recipeItemContainer = itemView.findViewById(R.id.recipeItemContainer);
         }
 
         public void bind(RecipeEntity recipe) {
@@ -68,6 +90,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
             recipeCategoryTextView.setText(recipe.getCategory().toString());
             recipeDifficultyTextView.setText(recipe.getDifficulty().toString());
 
+            recipeItemContainer.setOnClickListener((v) -> {
+                NavHostFragment.findNavController(fragment)
+                        .navigate(RecipeOverviewFragmentDirections.actionRecipeOverviewFragmentToRecipeDetailsFragment(recipe.getId()));
+
+            });
 
             if (recipe.getImage() != null) {
                 recipeImageView.setImageBitmap(recipe.getImage());
