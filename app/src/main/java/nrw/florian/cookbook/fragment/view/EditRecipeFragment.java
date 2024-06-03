@@ -383,7 +383,7 @@ public class EditRecipeFragment extends Fragment {
             temporaryRecipe.setRecipeProperties(properties);
 
             if (binding.recipeImageView.getDrawable() != null)
-                temporaryRecipe.setImage(BitmapUtil.compressBitmap(((BitmapDrawable) binding.recipeImageView.getDrawable()).getBitmap(), 400, 80));
+                temporaryRecipe.setImage(BitmapUtil.compressBitmap(((BitmapDrawable) binding.recipeImageView.getDrawable()).getBitmap(), 400, 90));
 
             // Save recipe
             try (RecipeDatabaseOpenHelper helper = new RecipeDatabaseOpenHelper(getContext())) {
@@ -398,7 +398,7 @@ public class EditRecipeFragment extends Fragment {
         Bitmap compressedBitmap = null;
         if (binding.recipeImageView.getDrawable() != null) {
             final Bitmap imageBitmap = ((BitmapDrawable) binding.recipeImageView.getDrawable()).getBitmap();
-            compressedBitmap = BitmapUtil.compressBitmap(imageBitmap, 400, 80);
+            compressedBitmap = BitmapUtil.compressBitmap(imageBitmap, 400, 90);
         }
 
         int servings = Integer.parseInt(binding.servingsNumber.getText().toString().trim());
