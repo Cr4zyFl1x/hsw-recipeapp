@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- ===========================================
+     DO NOT RECOMMIT THIS FILE!
+     OTHERWISE YOUR API-KEYS WILL MAY BE EXPOSED
+     =========================================== -->
+
+<resources>
+    <string name="weather_api_key">- API KEY FOR OWM HERE -</string>
+</resources>
