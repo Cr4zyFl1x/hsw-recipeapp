@@ -29,12 +29,12 @@ public class RecipeTagViewFragment extends Fragment {
 
     public static RecipeTagViewFragment newInstance(final RecipePropertyEntity recipePropertyEntity)
     {
-        RecipeTagViewFragment lf = new RecipeTagViewFragment();
+        RecipeTagViewFragment fragment = new RecipeTagViewFragment();
         Bundle args = new Bundle();
 
         args.putSerializable(RECIPE_PROPERTY, recipePropertyEntity);
-        lf.setArguments(args);
-        return lf;
+        fragment.setArguments(args);
+        return fragment;
     }
 
 
