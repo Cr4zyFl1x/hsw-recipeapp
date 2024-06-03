@@ -4,25 +4,29 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import nrw.florian.cookbook.db.DBInfo;
 import nrw.florian.cookbook.db.DatabaseOpenHelper;
+import nrw.florian.cookbook.db.listener.DatabaseChangeListener;
 
 /**
  * @author Florian J. Kleine-Vorholt
  */
 public class ShoppingListItemDatabaseOpenHelper extends DatabaseOpenHelper<ShoppingListItemEntity> {
+    private DatabaseChangeListener databaseChangeListener;
 
+    private final MutableLiveData<List<ShoppingListItemEntity>> liveDataList = new MutableLiveData<>();
 
     public ShoppingListItemDatabaseOpenHelper(Context context)
     {
         super(context, null, 1);
     }
-
-
 
     /**
      * {@inheritDoc}
@@ -113,6 +117,12 @@ public class ShoppingListItemDatabaseOpenHelper extends DatabaseOpenHelper<Shopp
         return false;
     }
 
+    public void updateDatabaseListener() {
+        if (databaseChangeListener != null) {
+            databaseChangeListener.onDataChanged();
+        }
+    }
+
 
     /**
      * {@inheritDoc}
@@ -120,6 +130,7 @@ public class ShoppingListItemDatabaseOpenHelper extends DatabaseOpenHelper<Shopp
     @Override
     public boolean remove(ShoppingListItemEntity entity)
     {
+        updateDatabaseListener();
         return getWritableDatabase().delete(DBInfo.TABLE_SHOPPINGLISTITEM,
                 "_id = " + entity.getId(), null) == 1;
     }
@@ -132,8 +143,8 @@ public class ShoppingListItemDatabaseOpenHelper extends DatabaseOpenHelper<Shopp
     public boolean exists(int id) {
         try (final Cursor cursor = getReadableDatabase().query(DBInfo.TABLE_SHOPPINGLISTITEM,
                 new String[]{"_id"},
-                "_id = " + id,
-                null,
+                "_id = ?",
+                new String[]{String.valueOf(id)},
                 null,
                 null,
                 null)) {
@@ -141,14 +152,13 @@ public class ShoppingListItemDatabaseOpenHelper extends DatabaseOpenHelper<Shopp
         }
     }
 
-    public List<ShoppingListItemEntity> getAllEntriesOfType (boolean active) {
-
-
+    public List<ShoppingListItemEntity> getAllEntriesOfType (boolean isDone) {
+        int activeNum = isDone ? 1 : 0;
 
         try (final Cursor cursor = getReadableDatabase().query(DBInfo.TABLE_SHOPPINGLISTITEM,
                 new String[]{"_id", "title", "done"},
-                null,
-                null,
+                "done = ?",
+                new String[]{String.valueOf(activeNum)},
                 null,
                 null,
                 null)) {
@@ -163,13 +173,29 @@ public class ShoppingListItemDatabaseOpenHelper extends DatabaseOpenHelper<Shopp
         }
     }
 
-    public Cursor selectCursor() {
-        return getReadableDatabase().query(DBInfo.TABLE_SHOPPINGLISTITEM,
+    public LiveData<List<ShoppingListItemEntity>> getAllEntriesOfTypeLive(boolean active) {
+        int activeNum = active ? 1 : 0;
+
+        try (final Cursor cursor = getReadableDatabase().query(DBInfo.TABLE_SHOPPINGLISTITEM,
                 new String[]{"_id", "title", "done"},
+                "done = ?",
+                new String[]{String.valueOf(activeNum)},
                 null,
                 null,
-                null,
-                null,
-                null);
+                null)) {
+            final List<ShoppingListItemEntity> list = new ArrayList<>();
+            while (cursor.moveToNext()) {
+                list.add(new ShoppingListItemEntity(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getInt(2) == 1));
+            }
+            liveDataList.setValue(list);
+            return liveDataList;
+        }
+    }
+
+    public void setDatabaseChangeListener(DatabaseChangeListener listener) {
+        this.databaseChangeListener = listener;
     }
 }
