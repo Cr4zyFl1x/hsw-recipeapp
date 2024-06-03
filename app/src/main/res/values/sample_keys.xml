@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sample_weather_api_key">INSERT HERE YOUR API KEY</string>
+</resources>

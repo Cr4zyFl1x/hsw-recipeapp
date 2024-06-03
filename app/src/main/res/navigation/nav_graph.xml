@@ -11,20 +11,40 @@
         android:label="@string/fragment_entry_title"
         tools:layout="@layout/fragment_entry" >
         <action
+            android:id="@+id/action_entryFragment_to_recipeOverviewFragment"
+            app:destination="@id/recipeOverviewFragment" />
+        <action
             android:id="@+id/action_entryFragment_to_shoppingListFragment"
             app:destination="@id/shoppingListFragment" />
+        <action
+            android:id="@+id/action_entryFragment_to_editRecipeFragment"
+            app:destination="@id/editRecipeFragment" />
+        <action
+            android:id="@+id/action_entryFragment_to_recipeDetailsFragment"
+            app:destination="@id/recipeDetailsFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/recipeDetailsFragment"
         android:name="nrw.florian.cookbook.fragment.view.RecipeDetailsFragment"
-        android:label="fragment_recipe_details"
-        tools:layout="@layout/fragment_recipe_details" />
+        android:label="@string/fragment_recipedetails_title"
+        tools:layout="@layout/fragment_recipe_details">
+        <action
+            android:id="@+id/action_recipeDetailsFragment_to_editRecipeFragment"
+            app:destination="@id/editRecipeFragment" />
+        <argument
+            android:name="recipe"
+            app:argType="nrw.florian.cookbook.db.recipe.RecipeEntity" />
+    </fragment>
     <fragment
         android:id="@+id/recipeOverviewFragment"
         android:name="nrw.florian.cookbook.RecipeOverviewFragment"
         android:label="@string/label_editRecipeFragment"
-        tools:layout="@layout/fragment_recipe_overview" />
+        tools:layout="@layout/fragment_recipe_overview" >
+        <action
+            android:id="@+id/action_recipeOverviewFragment_to_recipeDetailsFragment"
+            app:destination="@id/recipeDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/editRecipeFragment"
         android:name="nrw.florian.cookbook.EditRecipeFragment"

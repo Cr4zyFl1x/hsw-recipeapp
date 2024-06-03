@@ -7,18 +7,41 @@ import android.database.Cursor;
  */
 public class ShoppingListItemEntity {
 
+    /**
+     * The id of the shopping list item.
+     */
     private int _id;
 
+    /**
+     * The title of the shopping list item.
+     */
     private String title;
 
+    /**
+     * Whether the shopping list item is done.
+     */
     private boolean done;
 
+
+
+    /**
+     * Creates a new shopping list item entity.
+     * @param title The title of the shopping list item.
+     * @param done Whether the shopping list item is done.
+     */
     public ShoppingListItemEntity(final String title, final boolean done)
     {
         this.title = title;
         this.done = done;
     }
 
+
+    /**
+     * Creates a new shopping list item entity.
+     * @param _id The id of the shopping list item.
+     * @param title The title of the shopping list item.
+     * @param done Whether the shopping list item is done.
+     */
     ShoppingListItemEntity(final int _id, final String title, final boolean done)
     {
         this._id = _id;
@@ -26,27 +49,63 @@ public class ShoppingListItemEntity {
         this.done = done;
     }
 
-    public int getId() {
+
+    /**
+     * Gets the id of the shopping list item.
+     * @return The id of the shopping list item.
+     */
+    public int getId()
+    {
         return _id;
     }
 
-    public String getTitle() {
+
+    /**
+     * Gets the title of the shopping list item.
+     * @return The title of the shopping list item.
+     */
+    public String getTitle()
+    {
         return title;
     }
 
-    public boolean isDone() {
+
+    /**
+     * Gets whether the shopping list item is done.
+     * @return Whether the shopping list item is done.
+     */
+    public boolean isDone()
+    {
         return done;
     }
 
-    public void setTitle(String title) {
+
+    /**
+     * Sets the title of the shopping list item.
+     * @param title The title of the shopping list item.
+     */
+    public void setTitle(String title)
+    {
         this.title = title;
     }
 
-    public void setDone(boolean done) {
+
+    /**
+     * Sets whether the shopping list item is done.
+     * @param done Whether the shopping list item is done.
+     */
+    public void setDone(boolean done)
+    {
         this.done = done;
     }
 
-    void setId(int _id) {
+
+    /**
+     * Sets the id of the shopping list item.
+     * @param _id The id of the shopping list item.
+     */
+    void setId(int _id)
+    {
         this._id = _id;
     }
 

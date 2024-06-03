@@ -10,15 +10,21 @@ import java.util.Optional;
 
 import nrw.florian.cookbook.db.DBInfo;
 import nrw.florian.cookbook.db.DatabaseOpenHelper;
+import nrw.florian.cookbook.db.RecipeFindable;
 import nrw.florian.cookbook.db.recipe.RecipeEntity;
 
 
 /**
  * @author Florian J. Kleine-Vorholt
  */
-public class RecipePropertyDatabaseOpenHelper extends DatabaseOpenHelper<RecipePropertyEntity> {
+public class RecipePropertyDatabaseOpenHelper
+        extends DatabaseOpenHelper<RecipePropertyEntity>
+        implements RecipeFindable<RecipePropertyEntity> {
 
-
+    /**
+     * Creates a new instance of RecipePropertyDatabaseOpenHelper
+     * @param context the context
+     */
     public RecipePropertyDatabaseOpenHelper(final Context context)
     {
         super(context, null, 1);
@@ -69,13 +75,12 @@ public class RecipePropertyDatabaseOpenHelper extends DatabaseOpenHelper<RecipeP
 
 
     /**
-     * Finds all recipe properties
-     * @param recipeID the id of the recipe
-     * @return the recipe properties
+     * {@inheritDoc}
      */
+    @Override
     public List<RecipePropertyEntity> findByRecipeId(final int recipeID)
     {
-        try (final Cursor cursor = getReadableDatabase().query(DBInfo.TABLE_INGREDIENT,
+        try (final Cursor cursor = getReadableDatabase().query(DBInfo.TABLE_RECIPE_RECIPEPROPERTY,
                 new String[]{"_id", "recipeId", "property"},
                 "recipeId = " + recipeID,
                 null, null, null, null))
@@ -118,6 +123,7 @@ public class RecipePropertyDatabaseOpenHelper extends DatabaseOpenHelper<RecipeP
         }
         return false;
     }
+
 
     /**
      * Saves or updates a list of properties

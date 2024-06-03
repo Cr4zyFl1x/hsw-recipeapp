@@ -16,6 +16,8 @@
     <string name="making">Zubereitung</string>
     <string name="search">Suche</string>
     <string name="search_verb">Suchen</string>
+    <string name="error">Fehler!</string>
+    <string name="unknown">Unbekannt</string>
 
 
 
@@ -37,6 +39,41 @@
 
 
 
+    <!-- ==================
+         DIFFICULTY STRINGS
+         ================== -->
+
+    <string name="dfc_easy">Einfach</string>
+    <string name="dfc_medium">Mittel</string>
+    <string name="dfc_hard">Schwer</string>
+
+
+
+    <!-- =======================
+         RECIPE-CATEGORY STRINGS
+         ======================= -->
+
+    <string name="rc_soup">Suppe</string>
+    <string name="rc_sauce">Soße</string>
+    <string name="rc_dessert">Dessert</string>
+    <string name="rc_salad">Salat</string>
+    <string name="rc_main">Hauptspeise</string>
+    <string name="rc_starter">Vorspeise</string>
+    <string name="rc_snack">Snack</string>
+    <string name="rc_drink">Getränk</string>
+
+
+
+    <!-- =======================
+         RECIPE-PROPERTY STRINGS
+         ======================= -->
+
+    <string name="rp_vegetarian">Vegetarisch</string>
+    <string name="rp_meat">Fleischhaltig</string>
+    <string name="rp_cold">Kalt</string>
+    <string name="rp_warm">Warm</string>
+
+
 
     <!-- ================
          FRAGMENT STRINGS
@@ -46,9 +83,16 @@
     <string name="fragment_entry_title">GenussGuru - Start</string>
     <string name="recipe_overview">Rezeptübersicht</string>
     <string name="recipe_add">Rezept hinzufügen</string>
+    <string name="entry_tempC_label">%1$s °C</string>
+    <string name="location_denied_message">Der Standortzugriff wurde abgelehnt, daher können die Wetterdaten nicht ermittelt werden.</string>
+    <string name="location_permitted_message">Die Wetterdaten werden nun geladen …</string>
 
     <!-- // RecipeDetailsFragment // -->
+    <string name="fragment_recipedetails_title">Rezeptansicht</string>
     <string name="put_on_shopping_list">Auf die Einkaufsliste</string>
+    <string name="cnt_portions">%1$d P.</string>
+    <string name="ingredients_added_to_shopping_list">%1$d Einträge zur Einkaufsliste hinzugefügt!</string>
+    <string name="recipe_kcalories">%1$d kcal</string>
 
 
 

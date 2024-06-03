@@ -1,27 +1,26 @@
 package nrw.florian.cookbook.fragment.list;
 
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import nrw.florian.cookbook.fragment.list.placeholder.PlaceholderContent.PlaceholderItem;
-import nrw.florian.cookbook.databinding.FragmentRecipeIngredientItemBinding;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link PlaceholderItem}.
- * TODO: Replace the implementation with code for your data type.
- */
+import nrw.florian.cookbook.databinding.FragmentRecipeIngredientItemBinding;
+import nrw.florian.cookbook.db.ingredient.IngredientEntity;
+
+
 public class RecipeIngredientRecyclerViewAdapter extends RecyclerView.Adapter<RecipeIngredientRecyclerViewAdapter.ViewHolder> {
 
-    private final List<PlaceholderItem> mValues;
+    private final List<IngredientEntity> mValues;
+    private final Context context;
 
-    public RecipeIngredientRecyclerViewAdapter(List<PlaceholderItem> items) {
+    public RecipeIngredientRecyclerViewAdapter(List<IngredientEntity> items, Context context) {
         mValues = items;
+        this.context = context;
     }
 
     @Override
@@ -32,31 +31,35 @@ public class RecipeIngredientRecyclerViewAdapter extends RecyclerView.Adapter<Re
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
+    public void onBindViewHolder(final ViewHolder holder, int position)
+    {
+        holder.quantityTextView.setText("" + mValues.get(position).getQuantity());
+        holder.unitTextView.setText(mValues.get(position).getUnit().getString(context));
+        holder.titleTextView.setText(mValues.get(position).getName());
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount()
+    {
         return mValues.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public PlaceholderItem mItem;
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public final TextView quantityTextView;
+        public final TextView unitTextView;
+        public final TextView titleTextView;
 
         public ViewHolder(FragmentRecipeIngredientItemBinding binding) {
             super(binding.getRoot());
-            mIdView = binding.itemNumber;
-            mContentView = binding.content;
+            quantityTextView = binding.ingredientQuantity;
+            unitTextView = binding.ingredientUnit;
+            titleTextView = binding.ingredientTitle;
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + titleTextView.getText() + "'";
         }
     }
 }

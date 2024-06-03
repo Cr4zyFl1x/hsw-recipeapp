@@ -10,20 +10,30 @@ import java.util.Optional;
 
 import nrw.florian.cookbook.db.DBInfo;
 import nrw.florian.cookbook.db.DatabaseOpenHelper;
+import nrw.florian.cookbook.db.RecipeFindable;
 import nrw.florian.cookbook.db.recipe.RecipeEntity;
 
 /**
  * @author Florian J. Kleine-Vorholt
  */
-public class IngredientDatabaseOpenHelper extends DatabaseOpenHelper<IngredientEntity> {
+public class IngredientDatabaseOpenHelper
+        extends DatabaseOpenHelper<IngredientEntity>
+        implements RecipeFindable<IngredientEntity> {
 
-
+    /**
+     * Creates a new instance of the database helper
+     * @param context the app context
+     */
     public IngredientDatabaseOpenHelper(final Context context)
     {
         super(context, null, 1);
     }
 
 
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<IngredientEntity> findAll()
     {
@@ -50,6 +60,9 @@ public class IngredientDatabaseOpenHelper extends DatabaseOpenHelper<IngredientE
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<IngredientEntity> findById(final int id)
     {
@@ -75,10 +88,9 @@ public class IngredientDatabaseOpenHelper extends DatabaseOpenHelper<IngredientE
 
 
     /**
-     * Finds all ingredients for a recipe id
-     * @param recipeID the id of the recipe
-     * @return the ingredients
+     * {@inheritDoc}
      */
+    @Override
     public List<IngredientEntity> findByRecipeId(final int recipeID)
     {
         try (final Cursor cursor = getReadableDatabase().query(DBInfo.TABLE_INGREDIENT,
@@ -100,6 +112,9 @@ public class IngredientDatabaseOpenHelper extends DatabaseOpenHelper<IngredientE
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean saveOrUpdate(final IngredientEntity entity)
     {
@@ -143,6 +158,9 @@ public class IngredientDatabaseOpenHelper extends DatabaseOpenHelper<IngredientE
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean remove(final IngredientEntity entity)
     {
@@ -178,6 +196,9 @@ public class IngredientDatabaseOpenHelper extends DatabaseOpenHelper<IngredientE
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean exists(final int id)
     {

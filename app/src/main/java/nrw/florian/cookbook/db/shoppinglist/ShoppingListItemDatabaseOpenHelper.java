@@ -21,6 +21,10 @@ import nrw.florian.cookbook.db.listener.DatabaseChangeListener;
 public class ShoppingListItemDatabaseOpenHelper extends DatabaseOpenHelper<ShoppingListItemEntity> {
     private DatabaseChangeListener databaseChangeListener;
 
+    /**
+     * Creates a new instance of {@link ShoppingListItemDatabaseOpenHelper}.
+     * @param context the context in which to open the database
+     */
     private final MutableLiveData<List<ShoppingListItemEntity>> liveDataList = new MutableLiveData<>();
 
     public ShoppingListItemDatabaseOpenHelper(Context context)
