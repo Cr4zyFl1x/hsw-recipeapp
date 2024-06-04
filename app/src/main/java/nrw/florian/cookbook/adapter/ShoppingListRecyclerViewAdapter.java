@@ -15,17 +15,17 @@ import java.util.List;
 
 import nrw.florian.cookbook.R;
 import nrw.florian.cookbook.db.shoppinglist.ShoppingListItemEntity;
-import nrw.florian.cookbook.viewModel.ShoppingListViewModel;
+import nrw.florian.cookbook.repositories.ShoppingListRepository;
 
 public class ShoppingListRecyclerViewAdapter extends RecyclerView.Adapter<ShoppingListRecyclerViewAdapter.ShoppingListViewHolder> {
     private List<ShoppingListItemEntity> items;
-    ShoppingListViewModel viewModel;
     private final boolean isDone;
+    private final ShoppingListRepository repository;
 
-    public ShoppingListRecyclerViewAdapter(List<ShoppingListItemEntity> items, ShoppingListViewModel viewModel, boolean isDone) {
+    public ShoppingListRecyclerViewAdapter(List<ShoppingListItemEntity> items, ShoppingListRepository repository, boolean isDone) {
         super();
         this.items = items;
-        this.viewModel = viewModel;
+        this.repository = repository;
         this.isDone = isDone;
     }
 
@@ -49,18 +49,17 @@ public class ShoppingListRecyclerViewAdapter extends RecyclerView.Adapter<Shoppi
             makeStrikethrough(holder.textView, isDone);
             holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 item.setDone(false);
-                viewModel.upsert(item);
+                repository.upsert(item);
             });
         }
         if (!isDone) {
             holder.textView.setText(item.getTitle());
-//            holder.textView.setTextColor(808080);
             holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 item.setDone(true);
-                viewModel.upsert(item);
+                repository.upsert(item);
             });
         }
-        holder.imageButton.setOnClickListener(v -> viewModel.delete(item));
+        holder.imageButton.setOnClickListener(v -> repository.delete(item));
     }
 
     @Override
@@ -82,7 +81,6 @@ public class ShoppingListRecyclerViewAdapter extends RecyclerView.Adapter<Shoppi
 
     public void setItems(List<ShoppingListItemEntity> items) {
         this.items = items;
-        notifyDataSetChanged();
     }
 
     public static class ShoppingListViewHolder extends RecyclerView.ViewHolder {

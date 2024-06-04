@@ -53,7 +53,7 @@
     <fragment
             android:id="@+id/shoppingListFragment"
             android:name="nrw.florian.cookbook.fragment.view.ShoppingListFragment"
-            android:label="fragment_shopping_list"
+            android:label="@string/einkaufsliste"
             tools:layout="@layout/fragment_shopping_list" >
         <action
             android:id="@+id/action_shoppingListFragment_to_entryFragment"

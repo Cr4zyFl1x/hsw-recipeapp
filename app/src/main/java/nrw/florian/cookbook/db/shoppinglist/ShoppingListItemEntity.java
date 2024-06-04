@@ -1,7 +1,5 @@
 package nrw.florian.cookbook.db.shoppinglist;
 
-import android.database.Cursor;
-
 /**
  * @author Florian J. Kleine-Vorholt
  */
@@ -107,9 +105,5 @@ public class ShoppingListItemEntity {
     void setId(int _id)
     {
         this._id = _id;
-    }
-
-    public static ShoppingListItemEntity getShoppingListItemEntity(Cursor cursor) {
-        return new ShoppingListItemEntity(cursor.getInt(0), cursor.getString(1), cursor.getString(2).equals("1"));
     }
 }

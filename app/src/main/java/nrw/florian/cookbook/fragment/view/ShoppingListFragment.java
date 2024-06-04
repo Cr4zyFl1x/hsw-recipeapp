@@ -9,7 +9,6 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,8 +19,6 @@ import nrw.florian.cookbook.db.listener.DatabaseChangeListener;
 import nrw.florian.cookbook.db.shoppinglist.ShoppingListItemDatabaseOpenHelper;
 import nrw.florian.cookbook.db.shoppinglist.ShoppingListItemEntity;
 import nrw.florian.cookbook.repositories.ShoppingListRepository;
-import nrw.florian.cookbook.viewModel.ShoppingListViewModel;
-import nrw.florian.cookbook.viewModel.ShoppingListViewModelFactory;
 
 public class ShoppingListFragment extends Fragment implements DatabaseChangeListener {
 
@@ -31,18 +28,16 @@ public class ShoppingListFragment extends Fragment implements DatabaseChangeList
     private ShoppingListRecyclerViewAdapter activeEntriesAdapter;
     private ShoppingListRecyclerViewAdapter completedEntriesAdapter;
 
-    private ShoppingListItemDatabaseOpenHelper databaseOpenHelper;
+    private ShoppingListRepository repository;
 
-    private ShoppingListViewModel viewModel;
+    private ShoppingListItemDatabaseOpenHelper databaseOpenHelper;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.databaseOpenHelper = new ShoppingListItemDatabaseOpenHelper(requireContext());
-        databaseOpenHelper.setDatabaseChangeListener(this);
-        ShoppingListRepository repository = new ShoppingListRepository(databaseOpenHelper);
-        ShoppingListViewModelFactory factory = new ShoppingListViewModelFactory(repository);
-        viewModel = new ViewModelProvider(this, factory).get(ShoppingListViewModel.class);
+        repository = new ShoppingListRepository(databaseOpenHelper);
+        repository.setDatabaseChangeListener(this);
     }
 
     @Nullable
@@ -64,7 +59,7 @@ public class ShoppingListFragment extends Fragment implements DatabaseChangeList
                 binding.addEntryInput.setError(getString(R.string.please_insert_entry));
                 return;
             }
-            viewModel.upsert(new ShoppingListItemEntity(binding.addEntryInput.getText().toString(), false));
+            repository.upsert(new ShoppingListItemEntity(binding.addEntryInput.getText().toString(), false));
 
             binding.addEntryInput.setText("");
         });
@@ -74,7 +69,7 @@ public class ShoppingListFragment extends Fragment implements DatabaseChangeList
         LinearLayoutManager completedEntriesManager = new LinearLayoutManager(getContext());
         completedEntriesRecyclerView = requireView().findViewById(R.id.completedEntriesList);
         completedEntriesRecyclerView.setLayoutManager(completedEntriesManager);
-        completedEntriesAdapter = new ShoppingListRecyclerViewAdapter(this.databaseOpenHelper.getAllEntriesOfType(true), viewModel, true);
+        completedEntriesAdapter = new ShoppingListRecyclerViewAdapter(this.databaseOpenHelper.getAllEntriesOfType(true), repository, true);
         completedEntriesRecyclerView.setAdapter(completedEntriesAdapter);
     }
 
@@ -82,7 +77,7 @@ public class ShoppingListFragment extends Fragment implements DatabaseChangeList
         LinearLayoutManager activeEntriesManager = new LinearLayoutManager(getContext());
         activeEntriesRecyclerView = requireView().findViewById(R.id.activeEntriesList);
         activeEntriesRecyclerView.setLayoutManager(activeEntriesManager);
-        activeEntriesAdapter = new ShoppingListRecyclerViewAdapter(this.databaseOpenHelper.getAllEntriesOfType(false) ,viewModel, false);
+        activeEntriesAdapter = new ShoppingListRecyclerViewAdapter(this.databaseOpenHelper.getAllEntriesOfType(false) ,repository, false);
         activeEntriesRecyclerView.setAdapter(activeEntriesAdapter);
     }
 
@@ -92,10 +87,10 @@ public class ShoppingListFragment extends Fragment implements DatabaseChangeList
 
     @Override
     public void onDataChanged() {
-        activeEntriesAdapter.setItems(this.databaseOpenHelper.getAllEntriesOfType(false));
+        activeEntriesAdapter.setItems(this.repository.getAllEntriesOfType(false));
         activeEntriesRecyclerView.setAdapter(activeEntriesAdapter);
 
-        completedEntriesAdapter.setItems(this.databaseOpenHelper.getAllEntriesOfType(true));
+        completedEntriesAdapter.setItems(this.repository.getAllEntriesOfType(true));
         completedEntriesRecyclerView.setAdapter(completedEntriesAdapter);
     }
 }
