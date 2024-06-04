@@ -9,6 +9,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.ArrayList;
@@ -18,10 +22,13 @@ import java.util.stream.Collectors;
 import nrw.florian.cookbook.R;
 import nrw.florian.cookbook.databinding.FragmentRecipeDetailsBinding;
 import nrw.florian.cookbook.db.ingredient.IngredientEntity;
+import nrw.florian.cookbook.db.recipe.RecipeDatabaseOpenHelper;
 import nrw.florian.cookbook.db.recipe.RecipeEntity;
+import nrw.florian.cookbook.db.recipeproperty.RecipePropertyEntity;
 import nrw.florian.cookbook.db.shoppinglist.ShoppingListItemDatabaseOpenHelper;
 import nrw.florian.cookbook.db.shoppinglist.ShoppingListItemEntity;
 import nrw.florian.cookbook.fragment.list.RecipeIngredientRecyclerViewAdapter;
+import nrw.florian.cookbook.fragment.list.RecipeTagViewFragment;
 
 
 /**
@@ -79,26 +86,38 @@ public class RecipeDetailsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
+    }
 
-        RecipeDetailsFragmentArgs args = RecipeDetailsFragmentArgs.fromBundle(getArguments());
-        recipe = args.getRecipe();
-        currentPortions = recipe.getDefaultServings();
 
-        // Create copy of ingredients
-        currentIngredients = recipe.getIngredients().stream()
-                .map(j -> new IngredientEntity(j.getId(), j.getRecipeID(), j.getName(), j.getQuantity(), j.getUnit()))
-                .collect(Collectors.toList());
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
 
-        // Ingredients List
-        ingredientsAdapter = new RecipeIngredientRecyclerViewAdapter(currentIngredients, requireContext());
-        binding.recipeIngredientsRecyclerView.setAdapter(ingredientsAdapter);
-        binding.recipeIngredientsRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        initialize();
+        initializeEditButton();
+    }
 
-        // Initialize all
-        binding.recipeTitleTextView.setText(recipe.getTitle());
-        binding.recipeEnergyTextView.setText(getString(R.string.recipe_kcalories, recipe.getCalories()));
-        binding.recipeDifficultyTextView.setText(recipe.getDifficulty().toString());
-        binding.makingDescriptionTextView.setText(recipe.getInstructions());
+
+    private void initializeEditButton()
+    {
+        if (recipe == null || recipe.getId() == 0) {
+            Toast.makeText(requireContext(), getString(R.string.error_loading_recipe), Toast.LENGTH_LONG).show();
+            return;
+        }
+        binding.floatingActionButton.setOnClickListener(v ->
+                NavHostFragment.findNavController(this)
+                        .navigate(RecipeDetailsFragmentDirections.actionRecipeDetailsFragmentToEditRecipeFragment(recipe)));
+    }
+
+
+    private void initialize()
+    {
+        // Initialize Recipe
+        if (!initRecipeData())
+            return;
 
         // Image
         initImage();
@@ -108,6 +127,61 @@ public class RecipeDetailsFragment extends Fragment {
 
         // Shopping List
         initShoppingList();
+
+        // Init Tags (RecipeProperties)
+        initTags();
+    }
+
+    /**
+     * Initialize the recipe data object
+     */
+    private boolean initRecipeData()
+    {
+        try (final RecipeDatabaseOpenHelper dbHelper = new RecipeDatabaseOpenHelper(requireContext())) {
+            this.recipe = dbHelper.findById(RecipeDetailsFragmentArgs
+                            .fromBundle(getArguments()).getRecipeID())
+                    .orElseThrow(() -> new IllegalArgumentException("Recipe not found"));
+            currentPortions = recipe.getDefaultServings();
+
+            currentIngredients = recipe.getIngredients().stream()
+                    .map(j -> new IngredientEntity(j.getId(), j.getRecipeID(), j.getName(), j.getQuantity(), j.getUnit()))
+                    .collect(Collectors.toList());
+
+            // Ingredients List
+            ingredientsAdapter = new RecipeIngredientRecyclerViewAdapter(currentIngredients, requireContext());
+            binding.recipeIngredientsRecyclerView.setAdapter(ingredientsAdapter);
+            binding.recipeIngredientsRecyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+
+            // Initialize all
+            binding.recipeTitleTextView.setText(recipe.getTitle());
+            binding.recipeEnergyTextView.setText(getString(R.string.recipe_kcalories, recipe.getCalories()));
+            binding.recipeTimeTextView.setText(getString(R.string.recipe_workmin, recipe.getWorkTime()));
+            binding.recipeDifficultyTextView.setText(recipe.getDifficulty().toString());
+            binding.makingDescriptionTextView.setText(recipe.getInstructions());
+
+            return true;
+        } catch (IllegalArgumentException e) {
+            Toast.makeText(requireContext(), getString(R.string.error_loading_recipe), Toast.LENGTH_LONG).show();
+            NavHostFragment.findNavController(this).popBackStack();
+            return false;
+        }
+    }
+
+    private void initTags()
+    {
+        // If no tags set -> hide tags
+        if (recipe.getRecipePropertyEntities() == null || recipe.getRecipePropertyEntities().isEmpty()) {
+            binding.tagsContainer.setVisibility(View.GONE);
+            binding.tagsTextView.setVisibility(View.GONE);
+            return;
+        }
+
+        final FragmentTransaction transaction = requireActivity().getSupportFragmentManager()
+                .beginTransaction();
+        for (RecipePropertyEntity tag : recipe.getRecipePropertyEntities()) {
+            transaction.add(R.id.tagsLayoutContainer, RecipeTagViewFragment.newInstance(tag));
+        }
+        transaction.commit();
     }
 
 

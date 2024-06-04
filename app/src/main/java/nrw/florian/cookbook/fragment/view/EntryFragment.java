@@ -157,23 +157,15 @@ public class EntryFragment extends Fragment {
         binding.recipeOverviewMenuButton.setOnClickListener((v) -> NavHostFragment.findNavController(this)
                 .navigate(EntryFragmentDirections.actionEntryFragmentToRecipeOverviewFragment()));
 
+        binding.addRecipeMenuButton.setOnClickListener(v -> NavHostFragment.findNavController(this)
+                .navigate(EntryFragmentDirections.actionEntryFragmentToEditRecipeFragment(null)));
+
         binding.shoppingListMenuButton.setOnClickListener((v) -> NavHostFragment.findNavController(this)
                 .navigate(EntryFragmentDirections.actionEntryFragmentToShoppingListFragment()));
     }
 
     private void initWeatherContainerClickListener()
     {
-        // TODO: Dies ist nur übergangsweise für das Testen der Detailansicht
-        RecipeEntity recipe;
-        recipe = new RecipeEntity(1, "Toast", null, 2, "Test1234\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTest1234Test1234", RecipeBaseCategory.MAIN, RecipeDifficulty.EASY, 20, 200,
-                new ArrayList<>(), new ArrayList<>());
-        recipe.getRecipePropertyEntities().add(new RecipePropertyEntity(RecipeProperty.COLD));
-        recipe.getRecipePropertyEntities().add(new RecipePropertyEntity(RecipeProperty.VEGETARIAN));
-        recipe.getIngredients().add(new IngredientEntity(1, "Toast", 1, IngredientUnit.PIECE));
-        recipe.getIngredients().add(new IngredientEntity(1, "Cheese", 2.5, IngredientUnit.SLICE));
-        recipe.setImage(BitmapFactory.decodeResource(getResources(), R.drawable.exampleimage_recipe));
-
-
         binding.weatherContainer.setOnClickListener((v) -> {
             if (requireActivity().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED &&
                     requireActivity().checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_DENIED) {
@@ -181,7 +173,7 @@ public class EntryFragment extends Fragment {
                 return;
             }
             NavHostFragment.findNavController(this)
-                    .navigate(EntryFragmentDirections.actionEntryFragmentToRecipeDetailsFragment(recipe));
+                    .navigate(EntryFragmentDirections.actionEntryFragmentToRecipeDetailsFragment(2));
         });
     }
 
@@ -206,12 +198,16 @@ public class EntryFragment extends Fragment {
      * Updates the weather data based on the current location
      * @param loc the current location
      */
-    private synchronized void updateWeatherData(final Location loc)
+    private void updateWeatherData(final Location loc)
     {
         final OpenWeatherMapAPIClient client = OpenWeatherMapAPIClient.createAPIClient(getString(R.string.weather_api_key));
         new Thread(() -> {
-            lastWeatherData = client.getCurrentWeather(loc.getLatitude(), loc.getLongitude());
-            updateWeatherContainer(lastWeatherData);
+            try {
+                lastWeatherData = client.getCurrentWeather(loc.getLatitude(), loc.getLongitude());
+                requireActivity().runOnUiThread(() -> updateWeatherContainer(lastWeatherData));
+            } catch (Exception e) {
+                requireActivity().runOnUiThread(() -> Toast.makeText(requireActivity(), getString(R.string.error), Toast.LENGTH_SHORT).show());
+            }
         }).start();
     }
 

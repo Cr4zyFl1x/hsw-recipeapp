@@ -34,7 +34,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:src="@drawable/exampleimage_recipe"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +45,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Cheeseburger mit Pommes"
+                android:text="@string/pl_recipe_title"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/recipePictureImageView"
@@ -80,7 +80,7 @@
                         android:id="@+id/recipeDifficultyTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Leicht"
+                        android:text="@string/dfc_easy"
                         android:textSize="14sp" />
 
                     <TextView
@@ -121,7 +121,7 @@
                         android:id="@+id/recipeTimeTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="40 min."
+                        android:text="@string/pl_recipe_wkt"
                         android:textSize="14sp" />
 
                     <TextView
@@ -162,7 +162,7 @@
                         android:id="@+id/recipeEnergyTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="1.590 kcal"
+                        android:text="@string/pl_recipe_calories"
                         android:textSize="14sp" />
 
                     <TextView
@@ -219,7 +219,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_weight="1"
-                    android:text="4P."
+                    android:text="@string/cnt_portions"
                     android:textAlignment="center"
                     android:textSize="18sp" />
 
@@ -257,11 +257,39 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/lorem_ipsum"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="@string/pl_lorem_ipsum"
                 app:layout_constraintEnd_toEndOf="@+id/recipeIngredientsRecyclerView"
                 app:layout_constraintStart_toStartOf="@+id/textView14"
                 app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+            <TextView
+                android:id="@+id/tagsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/tags"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/makingDescriptionTextView"
+                app:layout_constraintTop_toBottomOf="@+id/makingDescriptionTextView" />
+
+            <HorizontalScrollView
+                android:id="@+id/tagsContainer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/makingDescriptionTextView"
+                app:layout_constraintStart_toStartOf="@+id/tagsTextView"
+                app:layout_constraintTop_toBottomOf="@+id/tagsTextView">
+
+                <LinearLayout
+                    android:id="@+id/tagsLayoutContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

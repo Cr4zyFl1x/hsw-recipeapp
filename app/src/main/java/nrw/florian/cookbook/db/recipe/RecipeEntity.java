@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import nrw.florian.cookbook.db.ingredient.IngredientEntity;
 import nrw.florian.cookbook.db.recipeproperty.RecipeProperty;
 import nrw.florian.cookbook.db.recipeproperty.RecipePropertyEntity;
+import nrw.florian.cookbook.util.BitmapUtil;
 
 /**
  * @author Florian J. Kleine-Vorholt
@@ -30,7 +31,7 @@ public class RecipeEntity implements Serializable {
     /**
      * The image of the recipe.
      */
-    private Bitmap image;
+    private byte[] image;
 
     /**
      * The default servings of the recipe.
@@ -100,7 +101,7 @@ public class RecipeEntity implements Serializable {
     {
 
         this.title = title;
-        this.image = image;
+        this.image = BitmapUtil.bitmapToByte(image);
         this.defaultServings = defaultServings;
         this.instructions = instructions;
         this.category = category;
@@ -140,7 +141,7 @@ public class RecipeEntity implements Serializable {
     {
         this._id = _id;
         this.title = title;
-        this.image = image;
+        this.image = BitmapUtil.bitmapToByte(image);
         this.defaultServings = defaultServings;
         this.instructions = instructions;
         this.category = category;
@@ -228,7 +229,7 @@ public class RecipeEntity implements Serializable {
      */
     public void setImage(Bitmap image)
     {
-        this.image = image;
+        this.image = BitmapUtil.bitmapToByte(image);
     }
 
 
@@ -258,7 +259,7 @@ public class RecipeEntity implements Serializable {
      */
     public Bitmap getImage()
     {
-        return image;
+        return BitmapUtil.byteToBitmap(image);
     }
 
 

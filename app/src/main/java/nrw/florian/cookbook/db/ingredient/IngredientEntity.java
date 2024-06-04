@@ -192,4 +192,6 @@ public class IngredientEntity implements Serializable {
     {
         this.recipeID = recipeID;
     }
+
+    public String toString() { return quantity + " " + unit + " " + name; }
 }
