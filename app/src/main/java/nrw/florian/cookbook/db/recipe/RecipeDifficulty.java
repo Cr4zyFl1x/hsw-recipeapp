@@ -2,6 +2,9 @@ package nrw.florian.cookbook.db.recipe;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+
+import nrw.florian.cookbook.MainActivity;
 import nrw.florian.cookbook.R;
 import nrw.florian.cookbook.api.iface.StringResource;
 
@@ -47,5 +50,11 @@ public enum RecipeDifficulty implements StringResource {
     @Override
     public String getString(Context context) {
         return context.getString(getResourceId());
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return getString(MainActivity.getContext());
     }
 }

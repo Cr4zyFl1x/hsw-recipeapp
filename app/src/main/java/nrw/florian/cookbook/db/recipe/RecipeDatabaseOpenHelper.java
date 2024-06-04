@@ -14,7 +14,7 @@ import nrw.florian.cookbook.db.ingredient.IngredientDatabaseOpenHelper;
 import nrw.florian.cookbook.db.ingredient.IngredientEntity;
 import nrw.florian.cookbook.db.recipeproperty.RecipePropertyDatabaseOpenHelper;
 import nrw.florian.cookbook.db.recipeproperty.RecipePropertyEntity;
-import nrw.florian.cookbook.util.ByteStreamUtil;
+import nrw.florian.cookbook.util.BitmapUtil;
 
 /**
  * @author Florian J. Kleine-Vorholt
@@ -82,7 +82,7 @@ public class RecipeDatabaseOpenHelper extends DatabaseOpenHelper<RecipeEntity> {
         // DATA
         final ContentValues values = new ContentValues();
         values.put("title", entity.getTitle());
-        values.put("image", ByteStreamUtil.bitmapToByte(entity.getImage()));
+        values.put("image", BitmapUtil.bitmapToByte(entity.getImage()));
         values.put("defaultServings", entity.getDefaultServings());
         values.put("instructions", entity.getInstructions());
         values.put("category", entity.getCategory().name());
@@ -194,7 +194,7 @@ public class RecipeDatabaseOpenHelper extends DatabaseOpenHelper<RecipeEntity> {
         return new RecipeEntity(
                 cursor.getInt(0),
                 cursor.getString(1),
-                ByteStreamUtil.byteToBitmap(cursor.getBlob(2)),
+                BitmapUtil.byteToBitmap(cursor.getBlob(2)),
                 cursor.getInt(3),
                 cursor.getString(4),
                 RecipeBaseCategory.valueOf(cursor.getString(5)),

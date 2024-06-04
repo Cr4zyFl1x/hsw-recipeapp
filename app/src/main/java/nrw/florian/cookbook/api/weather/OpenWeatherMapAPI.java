@@ -2,6 +2,7 @@ package nrw.florian.cookbook.api.weather;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -78,15 +79,18 @@ public class OpenWeatherMapAPI implements OpenWeatherMapAPIClient {
     private JSONObject doRequest(final String url)
     {
         final String reqUrl = this.url + url + "&appid=" + this.apiKey;
+        Log.d(getClass().getSimpleName(), "Requesting: " + reqUrl);
 
         try {
             HttpURLConnection jsonConn = (HttpURLConnection) new URL(reqUrl).openConnection();
             final String response = new BufferedReader(new InputStreamReader(jsonConn.getInputStream())).lines().collect(Collectors.joining("\n"));
             JSONObject json = new JSONObject(response);
             jsonConn.disconnect();
+            Log.d(getClass().getSimpleName(), "API-Request successful!");
             return json;
         } catch (IOException | JSONException e) {
-            throw new RuntimeException("Error handling API-Request!", e);
+            Log.e(getClass().getSimpleName(), "Failure during API-Request!", e);
+            throw new RuntimeException("Error handling API-Request! URL: "  + reqUrl, e);
         }
     }
 

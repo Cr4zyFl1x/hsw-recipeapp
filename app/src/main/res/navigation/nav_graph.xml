@@ -33,23 +33,28 @@
             android:id="@+id/action_recipeDetailsFragment_to_editRecipeFragment"
             app:destination="@id/editRecipeFragment" />
         <argument
-            android:name="recipe"
-            app:argType="nrw.florian.cookbook.db.recipe.RecipeEntity" />
+            android:name="recipeID"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/recipeOverviewFragment"
-        android:name="nrw.florian.cookbook.RecipeOverviewFragment"
-        android:label="@string/label_editRecipeFragment"
-        tools:layout="@layout/fragment_recipe_overview" >
+        android:name="nrw.florian.cookbook.fragment.view.RecipeOverviewFragment"
+        android:label="@string/label_RecipeOverviewFragment"
+        tools:layout="@layout/fragment_recipe_overview">
         <action
             android:id="@+id/action_recipeOverviewFragment_to_recipeDetailsFragment"
             app:destination="@id/recipeDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/editRecipeFragment"
-        android:name="nrw.florian.cookbook.EditRecipeFragment"
-        android:label="@string/label_RecipeOverviewFragment"
-        tools:layout="@layout/fragment_edit_recipe" />
+        android:name="nrw.florian.cookbook.fragment.view.EditRecipeFragment"
+        android:label="@string/label_editRecipeFragment"
+        tools:layout="@layout/fragment_edit_recipe" >
+        <argument
+            android:name="recipe"
+            app:argType="nrw.florian.cookbook.db.recipe.RecipeEntity"
+            app:nullable="true" />
+    </fragment>
     <fragment
             android:id="@+id/shoppingListFragment"
             android:name="nrw.florian.cookbook.fragment.view.ShoppingListFragment"
