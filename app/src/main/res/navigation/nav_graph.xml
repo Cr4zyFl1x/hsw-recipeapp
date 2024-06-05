@@ -3,38 +3,77 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/entryFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="nrw.florian.cookbook.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:id="@+id/entryFragment"
+        android:name="nrw.florian.cookbook.fragment.view.EntryFragment"
+        android:label="@string/fragment_entry_title"
+        tools:layout="@layout/fragment_entry" >
+        <action
+            android:id="@+id/action_entryFragment_to_recipeOverviewFragment"
+            app:destination="@id/recipeOverviewFragment" />
+        <action
+            android:id="@+id/action_entryFragment_to_shoppingListFragment"
+            app:destination="@id/shoppingListFragment" />
+        <action
+            android:id="@+id/action_entryFragment_to_editRecipeFragment"
+            app:destination="@id/editRecipeFragment" />
+        <action
+            android:id="@+id/action_entryFragment_to_recipeDetailsFragment"
+            app:destination="@id/recipeDetailsFragment" />
+        <action
+            android:id="@+id/action_entryFragment_to_weatherFragment"
+            app:destination="@id/weatherFragment" />
+    </fragment>
 
+    <fragment
+        android:id="@+id/recipeDetailsFragment"
+        android:name="nrw.florian.cookbook.fragment.view.RecipeDetailsFragment"
+        android:label="@string/fragment_recipedetails_title"
+        tools:layout="@layout/fragment_recipe_details">
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-        <action
-                android:id="@+id/action_FirstFragment_to_weatherFragment"
-                app:destination="@id/weatherFragment" />
+            android:id="@+id/action_recipeDetailsFragment_to_editRecipeFragment"
+            app:destination="@id/editRecipeFragment" />
+        <argument
+            android:name="recipeID"
+            app:argType="integer" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="nrw.florian.cookbook.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
+        android:id="@+id/recipeOverviewFragment"
+        android:name="nrw.florian.cookbook.fragment.view.RecipeOverviewFragment"
+        android:label="@string/label_RecipeOverviewFragment"
+        tools:layout="@layout/fragment_recipe_overview">
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_recipeOverviewFragment_to_recipeDetailsFragment"
+            app:destination="@id/recipeDetailsFragment" />
     </fragment>
     <fragment
-            android:id="@+id/weatherFragment"
-            android:name="nrw.florian.cookbook.WeatherFragment"
-            android:label="Wetter"
-            tools:layout="@layout/fragment_weather" >
+        android:id="@+id/editRecipeFragment"
+        android:name="nrw.florian.cookbook.fragment.view.EditRecipeFragment"
+        android:label="@string/label_editRecipeFragment"
+        tools:layout="@layout/fragment_edit_recipe" >
+        <argument
+            android:name="recipe"
+            app:argType="nrw.florian.cookbook.db.recipe.RecipeEntity"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+            android:id="@+id/shoppingListFragment"
+            android:name="nrw.florian.cookbook.fragment.view.ShoppingListFragment"
+            android:label="@string/einkaufsliste"
+            tools:layout="@layout/fragment_shopping_list" >
         <action
-                android:id="@+id/action_weatherFragment_to_FirstFragment"
-                app:destination="@id/FirstFragment" />
+            android:id="@+id/action_shoppingListFragment_to_entryFragment"
+            app:destination="@id/entryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/weatherFragment"
+        android:name="nrw.florian.cookbook.fragment.view.WeatherFragment"
+        android:label="@string/weather"
+        tools:layout="@layout/fragment_weather" >
+        <action
+            android:id="@+id/action_weatherFragment_to_entryFragment"
+            app:destination="@id/entryFragment" />
     </fragment>
 </navigation>

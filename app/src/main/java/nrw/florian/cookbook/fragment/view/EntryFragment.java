@@ -3,7 +3,6 @@ package nrw.florian.cookbook.fragment.view;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -21,19 +20,11 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 
 import nrw.florian.cookbook.R;
 import nrw.florian.cookbook.api.weather.OpenWeatherMapAPIClient;
 import nrw.florian.cookbook.api.weather.data.CurrentWeatherData;
 import nrw.florian.cookbook.databinding.FragmentEntryBinding;
-import nrw.florian.cookbook.db.ingredient.IngredientEntity;
-import nrw.florian.cookbook.db.ingredient.IngredientUnit;
-import nrw.florian.cookbook.db.recipe.RecipeBaseCategory;
-import nrw.florian.cookbook.db.recipe.RecipeDifficulty;
-import nrw.florian.cookbook.db.recipe.RecipeEntity;
-import nrw.florian.cookbook.db.recipeproperty.RecipeProperty;
-import nrw.florian.cookbook.db.recipeproperty.RecipePropertyEntity;
 
 /**
  * @author Florian J. Kleine-Vorholt
@@ -162,6 +153,9 @@ public class EntryFragment extends Fragment {
 
         binding.shoppingListMenuButton.setOnClickListener((v) -> NavHostFragment.findNavController(this)
                 .navigate(EntryFragmentDirections.actionEntryFragmentToShoppingListFragment()));
+
+        binding.weatherMenuButton.setOnClickListener(v -> NavHostFragment.findNavController(this)
+                .navigate(EntryFragmentDirections.actionEntryFragmentToWeatherFragment()));
     }
 
     private void initWeatherContainerClickListener()

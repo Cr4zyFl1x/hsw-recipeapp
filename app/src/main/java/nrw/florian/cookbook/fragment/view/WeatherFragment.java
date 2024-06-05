@@ -1,4 +1,6 @@
-package nrw.florian.cookbook;
+package nrw.florian.cookbook.fragment.view;
+
+import static com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_LONG;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +16,9 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Optional;
 
+import nrw.florian.cookbook.GPSTracker;
+import nrw.florian.cookbook.Location;
+import nrw.florian.cookbook.R;
 import nrw.florian.cookbook.databinding.FragmentWeatherBinding;
 import nrw.florian.cookbook.weather.WeatherAPIHelper;
 
@@ -24,11 +29,6 @@ public class WeatherFragment extends Fragment {
     private GPSTracker gpsTracker;
 
     private WeatherAPIHelper weatherAPIHelper;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Nullable
     @Override
@@ -48,13 +48,13 @@ public class WeatherFragment extends Fragment {
 
         binding.searchButton.setOnClickListener(
 
-        v -> {
-            if (isFieldFilled(binding.locationInput)) {
-                new Thread(() -> refreshWeather(binding.locationInput.getText().toString())).start();
-            } else {
-                binding.locationInput.setError(getString(R.string.location_required));
-            }
-        });
+                v -> {
+                    if (isFieldFilled(binding.locationInput)) {
+                        new Thread(() -> refreshWeather(binding.locationInput.getText().toString())).start();
+                    } else {
+                        binding.locationInput.setError(getString(R.string.location_required));
+                    }
+                });
 
         binding.getCurrentLocationButton.setOnClickListener(v -> new Thread(() -> {
             getGPSLocationFromOptional(view);
@@ -71,7 +71,7 @@ public class WeatherFragment extends Fragment {
         if (optionalLocation.isPresent()) {
             currentLocation = optionalLocation.get();
         } else {
-            Snackbar.make(requireContext(), view, getString(R.string.error_getting_location), Snackbar.LENGTH_LONG).show();
+            Snackbar.make(requireContext(), view, getString(R.string.error_getting_location), LENGTH_LONG).show();
         }
     }
 
