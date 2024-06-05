@@ -1,5 +1,7 @@
 package nrw.florian.cookbook;
 
+import static com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_LONG;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -44,7 +46,7 @@ public class GPSTracker extends Activity {
 
     private void createSnackbarPermissionDenied(View view) {
         Snackbar.make(context, view, context.getString(R.string.no_permission_cannot_access_location),
-                        Snackbar.LENGTH_LONG)
+                        LENGTH_LONG)
                 .setAction(R.string.permission_edit, click -> {
                     Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                     Uri uri = Uri.fromParts("package", context.getPackageName(), null);
