@@ -8,7 +8,7 @@ import android.net.Uri;
 import android.provider.Settings;
 import android.view.View;
 
-import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -29,7 +29,7 @@ public class GPSTracker extends Activity {
 
     public Optional<nrw.florian.cookbook.Location> getGPSLocation(View view) {
         this.locationBuilder = new nrw.florian.cookbook.Location.LocationBuilder();
-        if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             createSnackbarPermissionDenied(view);
         } else {
             fusedLocationClient.getLastLocation().addOnSuccessListener(location -> {
@@ -53,5 +53,4 @@ public class GPSTracker extends Activity {
                 })
                 .show();
     }
-
 }
