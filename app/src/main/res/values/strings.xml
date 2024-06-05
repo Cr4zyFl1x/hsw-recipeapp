@@ -1,12 +1,61 @@
 <resources>
-    <string name="app_name">HSW-Cookbook</string>
-    <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="app_name">GenussGuru</string>
 
+
+    <!-- ===============
+         LEXICAL STRINGS
+         =============== -->
+
+    <string name="weather">Wetter</string>
+    <string name="shopping_list">Einkaufsliste</string>
+    <string name="difficulty">Schwierigkeit</string>
+    <string name="work_time">Arbeitszeit</string>
+    <string name="energy">Energie</string>
+    <string name="ingredient">Zutat</string>
+    <string name="ingredients">Zutaten</string>
+    <string name="making">Zubereitung</string>
+    <string name="search">Suche</string>
+    <string name="search_verb">Suchen</string>
+    <string name="error">Fehler!</string>
+    <string name="unknown">Unbekannt</string>
+    <string name="tags">Tags</string>
+    <string name="tag">Tag</string>
+    <string name="reset">Zurücksetzen</string>
+
+
+    <!-- ============
+         UNIT STRINGS
+         ============ -->
+
+    <string name="us_grams">g</string>
+    <string name="us_kilograms">kg</string>
+    <string name="us_slice">Scheibe/n</string>
+    <string name="us_cup">Tasse/n</string>
+    <string name="us_teaspoon">TL</string>
+    <string name="us_tablespoon">EL</string>
+    <string name="us_piece">Stück/e</string>
+    <string name="us_prize">Prise/n</string>
+    <string name="us_bottle">Fl</string>
+    <string name="us_milliliters">ml</string>
+    <string name="us_liter">l</string>
+
+
+    <!-- ==================
+         DIFFICULTY STRINGS
+         ================== -->
+
+    <string name="dfc_easy">Einfach</string>
+    <string name="dfc_medium">Mittel</string>
+    <string name="dfc_hard">Schwer</string>
+
+    <!-- ==================
+         PERMISSION STRINGS
+         ================== -->
+
+    <string name="no_permission_cannot_access_location">Die Standort-Berechtigung wurde nicht erteilt und es kann kein Standort bestimmt werden.</string>
+    <string name="error_getting_location">Es ist ein Fehler bei der Standortbestimmung aufgetreten.</string>
+    <string name="error_weather_api">Ein Fehler ist bei der Datenabfrage entstanden.</string>
+    <string name="location_required">Bitte Standort angeben.</string>
     <string name="permission">Berechtigung anfordern</string>
     <string name="permission_edit">Berechtigungen anpassen</string>
     <string name="permission_granted">Berechtigung erteilt</string>
@@ -14,7 +63,75 @@
     <string name="permission_request">Möchten Sie diese Berechtigung wirklich erteilen?</string>
     <string name="permission_denied">Berechtigungsanfrage abgelehnt</string>
 
-    <string name="lorem_ipsum">
+    <!-- =======================
+         RECIPE-CATEGORY STRINGS
+         ======================= -->
+
+    <string name="rc_soup">Suppe</string>
+    <string name="rc_sauce">Soße</string>
+    <string name="rc_dessert">Dessert</string>
+    <string name="rc_salad">Salat</string>
+    <string name="rc_main">Hauptspeise</string>
+    <string name="rc_starter">Vorspeise</string>
+    <string name="rc_snack">Snack</string>
+    <string name="rc_drink">Getränk</string>
+
+
+    <!-- =======================
+         RECIPE-PROPERTY STRINGS
+         ======================= -->
+
+    <string name="rp_vegetarian">Vegetarisch</string>
+    <string name="rp_meat">Fleischhaltig</string>
+    <string name="rp_cold">Kalt</string>
+    <string name="rp_warm">Warm</string>
+
+
+    <!-- ================
+         FRAGMENT STRINGS
+         ================ -->
+
+    <!-- // EntryFragment // -->
+    <string name="fragment_entry_title">GenussGuru - Start</string>
+    <string name="recipe_overview">Rezeptübersicht</string>
+    <string name="recipe_add">Rezept hinzufügen</string>
+    <string name="entry_tempC_label">%1$s °C</string>
+    <string name="location_denied_message">Der Standortzugriff wurde abgelehnt, daher können die Wetterdaten nicht ermittelt werden.</string>
+    <string name="location_permitted_message">Die Wetterdaten werden nun geladen …</string>
+
+    <!-- // RecipeDetailsFragment // -->
+    <string name="fragment_recipedetails_title">Rezeptansicht</string>
+    <string name="put_on_shopping_list">Auf die Einkaufsliste</string>
+    <string name="cnt_portions">%1$d P.</string>
+    <string name="ingredients_added_to_shopping_list">%1$d Einträge zur Einkaufsliste hinzugefügt!</string>
+    <string name="recipe_kcalories">%1$d kcal</string>
+    <string name="recipe_workmin">%1$d min.</string>
+    <string name="error_loading_recipe">Fehler beim Laden des Rezepts!</string>
+
+    <!-- // EditRecipeFragment // -->
+    <string name="label_editRecipeFragment">Rezept hinzufügen/bearbeiten</string>
+
+    <!-- // RecipeOverviewFragment // -->
+    <string name="label_RecipeOverviewFragment">Übersicht Rezepte</string>
+
+    <!-- // ShoppingListFragment // -->
+    <string name="plus_symbol">+</string>
+    <string name="erledigte_eintraege">Erledigte Einträge</string>
+    <string name="eintrag_hinzufuegen">Eintrag hinzufügen</string>
+    <string name="please_insert_entry">Bitte Eintrag eingeben</string>
+    <string name="a_trash_can">a trash can</string>
+    <string name="einkaufsliste">Einkaufsliste</string>
+
+    <!-- // WeatherFragment // -->
+    <string name="mein_standort">Mein Standort</string>
+    <string name="aktuelle_vorhersage">Aktuelle Vorhersage</string>
+
+
+    <!-- ===================
+         PLACEHOLDER STRINGS
+         =================== -->
+
+    <string name="pl_lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
         dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
@@ -50,15 +167,15 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
-    <string name="erledigte_eintraege">Erledigte Einträge</string>
-    <string name="plus_symbol">+</string>
-    <string name="eintrag_hinzufuegen">Eintrag hinzufügen</string>
-    <string name="suchen">Suchen</string>
-    <string name="mein_standort">Mein Standort</string>
-    <string name="aktuelle_vorhersage">Aktuelle Vorhersage</string>
-    <string name="suche">Suche</string>
-    <string name="no_permission_cannot_access_location">Die Standort-Berechtigung wurde nicht erteilt und es kann kein Standort bestimmt werden.</string>
-    <string name="error_getting_location">Es ist ein Fehler bei der Standortbestimmung aufgetreten.</string>
-    <string name="error_weather_api">Ein Fehler ist bei der Datenabfrage entstanden.</string>
-    <string name="location_required">Bitte Standort angeben.</string>
+    <string name="pl_recipe_title">Cheeseburger mit Pommes</string>
+    <string name="pl_recipe_wkt">40 min.</string>
+    <string name="pl_recipe_calories">1.590 kcal</string>
+
+
+    <!-- =============
+         DUMMY STRINGS
+         ============= -->
+
+    <string name="action_settings">Settings</string>
+
 </resources>

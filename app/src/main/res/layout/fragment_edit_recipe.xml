@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.view.EditRecipeFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/recipeNameLayout"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/servingsNumber"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/recipeNameTextInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Rezeptname" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <EditText
+            android:id="@+id/servingsNumber"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:text="4"
+            app:layout_constraintStart_toStartOf="@+id/recipeNameLayout"
+            app:layout_constraintTop_toBottomOf="@+id/recipeNameLayout" />
+
+        <TextView
+            android:id="@+id/servingsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Anzahl Portionen"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/servingsNumber"
+            app:layout_constraintStart_toEndOf="@+id/servingsNumber"
+            app:layout_constraintTop_toTopOf="@+id/servingsNumber" />
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/quantityTextInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:inputType="numberSigned|numberDecimal"
+            android:hint="Menge"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/servingsNumber"
+            app:layout_constraintTop_toBottomOf="@+id/servingsNumber" />
+
+        <Spinner
+            android:id="@+id/typeOfQuantitySpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/quantityTextInput"
+            app:layout_constraintStart_toEndOf="@id/quantityTextInput"
+            app:layout_constraintTop_toTopOf="@id/quantityTextInput" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ingredientLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/typeOfQuantitySpinner"
+            app:layout_constraintStart_toStartOf="@+id/quantityTextInput"
+            app:layout_constraintTop_toBottomOf="@+id/quantityTextInput">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ingredientTextInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Zutat" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageButton
+                android:id="@+id/addIngredientButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:src="@android:drawable/ic_menu_add"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
+                app:layout_constraintTop_toTopOf="@id/typeOfQuantitySpinner"
+                app:layout_constraintBottom_toBottomOf="@id/ingredientLayout"
+                app:layout_constraintStart_toEndOf="@id/typeOfQuantitySpinner"/>
+
+
+        <LinearLayout
+            android:id="@+id/safedIngriedientsLinearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="@id/ingredientLayout"
+            app:layout_constraintTop_toBottomOf="@id/ingredientLayout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/recipeDescriptionLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/safedIngriedientsLinearLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/safedIngriedientsLinearLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/recipeDescriptionTextInput"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:hint="Rezeptbeschreibung" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <CheckBox
+            android:id="@+id/meatCheckBoxCreate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Fleischhaltig"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@id/titelCategorysTextView"
+            app:layout_constraintTop_toBottomOf="@+id/titelCategorysTextView" />
+
+        <CheckBox
+            android:id="@+id/warmCheckBoxCreate"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="Warm"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/meatCheckBoxCreate"
+            app:layout_constraintTop_toTopOf="@+id/meatCheckBoxCreate" />
+
+        <CheckBox
+            android:id="@+id/vegetarianCheckBoxCreate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Vegetarisch"
+            android:textColor="@color/vegetarian"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/meatCheckBoxCreate"
+            app:layout_constraintStart_toStartOf="@+id/meatCheckBoxCreate"
+            app:layout_constraintTop_toBottomOf="@+id/meatCheckBoxCreate" />
+
+        <CheckBox
+            android:id="@+id/coldCheckBoxCreate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Kalt"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/warmCheckBoxCreate"
+            app:layout_constraintStart_toStartOf="@+id/warmCheckBoxCreate"
+            app:layout_constraintTop_toBottomOf="@+id/meatCheckBoxCreate" />
+
+        <Spinner
+            android:id="@+id/categorySpinnerCreate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="@+id/vegetarianCheckBoxCreate"
+            app:layout_constraintStart_toStartOf="@+id/vegetarianCheckBoxCreate"
+            app:layout_constraintTop_toBottomOf="@+id/coldCheckBoxCreate" />
+
+        <Spinner
+            android:id="@+id/diffcultySpinnerCreate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/coldCheckBoxCreate"
+            app:layout_constraintStart_toStartOf="@+id/coldCheckBoxCreate"
+            app:layout_constraintTop_toTopOf="@id/categorySpinnerCreate" />
+
+        <EditText
+            android:id="@+id/workingHoursNumber"
+            android:layout_width="100dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:inputType="number"
+            app:layout_constraintStart_toStartOf="@id/categorySpinnerCreate"
+            app:layout_constraintTop_toBottomOf="@id/categorySpinnerCreate" />
+
+        <TextView
+            android:id="@+id/workingHoursText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Arbeitszeit in Minuten"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/workingHoursNumber"
+            app:layout_constraintStart_toEndOf="@+id/workingHoursNumber"
+            app:layout_constraintTop_toTopOf="@+id/workingHoursNumber" />
+
+        <EditText
+            android:id="@+id/energyNumber"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="number"
+            app:layout_constraintStart_toStartOf="@+id/workingHoursNumber"
+            app:layout_constraintTop_toBottomOf="@+id/workingHoursNumber" />
+
+        <TextView
+            android:id="@+id/energytext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:text=" kcal"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/energyNumber"
+            app:layout_constraintStart_toEndOf="@+id/energyNumber"
+            app:layout_constraintTop_toBottomOf="@+id/workingHoursNumber" />
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="200dp"
+            android:text="Speichern"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/energytext" />
+
+        <ImageButton
+            android:id="@+id/recipeImageButton"
+            android:layout_width="122dp"
+            android:layout_height="134dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@android:drawable/ic_menu_camera"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/recipeNameLayout"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/recipeImageView"
+            android:layout_width="122dp"
+            android:layout_height="134dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/recipeNameLayout"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/titelCategorysTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:text="Lege die Rezept Kategorien fest:"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recipeDescriptionLayout" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</FrameLayout>
