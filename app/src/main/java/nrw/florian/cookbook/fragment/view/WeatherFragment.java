@@ -68,8 +68,6 @@ public class WeatherFragment extends Fragment {
         locationManager = (LocationManager) requireActivity().getSystemService(Context.LOCATION_SERVICE);
         initLocationListeners();
 
-        refreshWeather(currentLocation);
-
         binding.searchButton.setOnClickListener(
 
                 v -> {
@@ -80,9 +78,9 @@ public class WeatherFragment extends Fragment {
                     }
                 });
 
-        binding.getCurrentLocationButton.setOnClickListener(v -> new Thread(() -> {
-            refreshWeather(currentLocation);
-        }).start());
+        binding.getCurrentLocationButton.setOnClickListener(v ->
+                refreshWeather(currentLocation)
+        );
     }
 
     /**
@@ -114,7 +112,6 @@ public class WeatherFragment extends Fragment {
      * Processes the result of the location permission request
      */
     private void processResult() {
-
         requireActivity().runOnUiThread(() -> {
             // Permission granted
             if (this.requireActivity().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
