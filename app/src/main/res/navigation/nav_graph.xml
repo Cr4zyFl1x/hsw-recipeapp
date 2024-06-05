@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_entryFragment_to_recipeDetailsFragment"
             app:destination="@id/recipeDetailsFragment" />
+        <action
+            android:id="@+id/action_entryFragment_to_weatherFragment"
+            app:destination="@id/weatherFragment" />
     </fragment>
 
     <fragment
@@ -62,6 +65,15 @@
             tools:layout="@layout/fragment_shopping_list" >
         <action
             android:id="@+id/action_shoppingListFragment_to_entryFragment"
+            app:destination="@id/entryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/weatherFragment"
+        android:name="nrw.florian.cookbook.fragment.view.WeatherFragment"
+        android:label="@string/weather"
+        tools:layout="@layout/fragment_weather" >
+        <action
+            android:id="@+id/action_weatherFragment_to_entryFragment"
             app:destination="@id/entryFragment" />
     </fragment>
 </navigation>

@@ -21,6 +21,7 @@
     <string name="tags">Tags</string>
     <string name="tag">Tag</string>
     <string name="reset">Zurücksetzen</string>
+    <string name="location">Standort</string>
 
 
     <!-- ============
@@ -48,6 +49,20 @@
     <string name="dfc_medium">Mittel</string>
     <string name="dfc_hard">Schwer</string>
 
+    <!-- ==================
+         PERMISSION STRINGS
+         ================== -->
+
+    <string name="no_permission_cannot_access_location">Die Standort-Berechtigung wurde nicht erteilt und es kann kein Standort bestimmt werden.</string>
+    <string name="error_getting_location">Es ist ein Fehler bei der Standortbestimmung aufgetreten.</string>
+    <string name="error_weather_api">Ein Fehler ist bei der Datenabfrage entstanden.</string>
+    <string name="location_required">Bitte Standort angeben.</string>
+    <string name="permission">Berechtigung anfordern</string>
+    <string name="permission_edit">Berechtigungen anpassen</string>
+    <string name="permission_granted">Berechtigung erteilt</string>
+    <string name="permission_already_granted">Berechtigung bereits erteilt</string>
+    <string name="permission_request">Möchten Sie diese Berechtigung wirklich erteilen?</string>
+    <string name="permission_denied">Berechtigungsanfrage abgelehnt</string>
 
     <!-- =======================
          RECIPE-CATEGORY STRINGS
@@ -99,6 +114,18 @@
 
     <!-- // RecipeOverviewFragment // -->
     <string name="label_RecipeOverviewFragment">Übersicht Rezepte</string>
+
+    <!-- // ShoppingListFragment // -->
+    <string name="plus_symbol">+</string>
+    <string name="erledigte_eintraege">Erledigte Einträge</string>
+    <string name="eintrag_hinzufuegen">Eintrag hinzufügen</string>
+    <string name="please_insert_entry">Bitte Eintrag eingeben</string>
+    <string name="a_trash_can">a trash can</string>
+    <string name="einkaufsliste">Einkaufsliste</string>
+
+    <!-- // WeatherFragment // -->
+    <string name="mein_standort">Mein Standort</string>
+    <string name="aktuelle_vorhersage">Aktuelle Vorhersage</string>
 
 
     <!-- ===================
@@ -152,15 +179,4 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="erledigte_eintraege">Erledigte Einträge</string>
-    <string name="plus_symbol">+</string>
-    <string name="eintrag_hinzufuegen">Eintrag hinzufügen</string>
-    <string name="mein_standort">Mein Standort</string>
-    <string name="aktuelle_vorhersage">Aktuelle Vorhersage</string>
-
-    <string name="suche">Suche</string>
-    <string name="suchen">Suchen</string>
-    <string name="please_insert_entry">Bitte Eintrag eingeben</string>
-    <string name="a_trash_can">a trash can</string>
-    <string name="einkaufsliste">Einkaufsliste</string>
 </resources>
