@@ -15,17 +15,10 @@ import nrw.florian.cookbook.db.DatabaseOpenHelper;
  * @author Florian J. Kleine-Vorholt
  */
 public class ShoppingListItemDatabaseOpenHelper extends DatabaseOpenHelper<ShoppingListItemEntity> {
-
-    /**
-     * Creates a new instance of {@link ShoppingListItemDatabaseOpenHelper}.
-     * @param context the context in which to open the database
-     */
     public ShoppingListItemDatabaseOpenHelper(Context context)
     {
         super(context, null, 1);
     }
-
-
 
     /**
      * {@inheritDoc}
@@ -122,12 +115,33 @@ public class ShoppingListItemDatabaseOpenHelper extends DatabaseOpenHelper<Shopp
     public boolean exists(int id) {
         try (final Cursor cursor = getReadableDatabase().query(DBInfo.TABLE_SHOPPINGLISTITEM,
                 new String[]{"_id"},
-                "_id = " + id,
-                null,
+                "_id = ?",
+                new String[]{String.valueOf(id)},
                 null,
                 null,
                 null)) {
             return cursor.moveToNext();
+        }
+    }
+
+    public List<ShoppingListItemEntity> getAllEntriesOfType (boolean isDone) {
+        int activeNum = isDone ? 1 : 0;
+
+        try (final Cursor cursor = getReadableDatabase().query(DBInfo.TABLE_SHOPPINGLISTITEM,
+                new String[]{"_id", "title", "done"},
+                "done = ?",
+                new String[]{String.valueOf(activeNum)},
+                null,
+                null,
+                null)) {
+            final List<ShoppingListItemEntity> list = new ArrayList<>();
+            while (cursor.moveToNext()) {
+                list.add(new ShoppingListItemEntity(
+                        cursor.getInt(0),
+                        cursor.getString(1),
+                        cursor.getInt(2) == 1));
+            }
+            return list;
         }
     }
 }
