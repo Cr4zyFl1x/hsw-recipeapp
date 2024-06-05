@@ -126,6 +126,7 @@
     <!-- // WeatherFragment // -->
     <string name="mein_standort">Mein Standort</string>
     <string name="aktuelle_vorhersage">Aktuelle Vorhersage</string>
+    <string name="loading">Lade...</string>
 
 
     <!-- ===================

@@ -2,45 +2,60 @@ package nrw.florian.cookbook.weather;
 
 import android.view.View;
 
-import androidx.fragment.app.Fragment;
-
-import com.google.android.material.snackbar.Snackbar;
-
+import nrw.florian.cookbook.api.weather.data.CurrentWeatherData;
 import nrw.florian.cookbook.databinding.FragmentWeatherBinding;
 
 public class WeatherUIUpdater {
     private final FragmentWeatherBinding binding;
-    private final Fragment fragment;
 
-    public WeatherUIUpdater(FragmentWeatherBinding binding, Fragment fragment) {
+    public WeatherUIUpdater(FragmentWeatherBinding binding) {
         this.binding = binding;
-        this.fragment = fragment;
     }
 
-    public void updateWeatherDetailsLayout(Weather currentWeather) {
+    public void updateWeatherDetailsLayout(CurrentWeatherData currentWeather) {
+        if (currentWeather == null) {
+            binding.weatherDetailsLinearLayout.setVisibility(View.INVISIBLE);
+            binding.getCurrentLocationButton.setVisibility(View.INVISIBLE);
+            return;
+        }
+        binding.weatherLinearLayout.setVisibility(View.VISIBLE);
         binding.weatherDetailsLinearLayout.setVisibility(View.VISIBLE);
-        binding.locationText.setText(currentWeather.getLocation());
-        binding.weatherIcon.setImageBitmap(currentWeather.getIcon());
-        binding.temperature.setText(String.format("%s°C", currentWeather.getTemp()));
-        binding.weatherIcon.setImageBitmap(currentWeather.getIcon());
-        binding.feelsLike.setText(String.format("Gefühlt %s°C", currentWeather.getFeelsLike()));
-        binding.minTemp.setText(currentWeather.getMinTemp());
-        binding.maxTemp.setText(currentWeather.getMaxTemp());
-        binding.windSpeed.setText(String.format("%s m/s ", currentWeather.getWind()));
-        binding.windDirection.setText(currentWeather.getWindDirection());
+        binding.locationText.setText(currentWeather.getCity());
+        binding.weatherIcon.setImageBitmap(currentWeather.getImage());
+        binding.temperature.setText(String.format("%s°C", formatTemp(currentWeather.getTempC())));
+        binding.weatherIcon.setImageBitmap(currentWeather.getImage());
+        binding.feelsLike.setText(String.format("Gefühlt %s°C", formatTemp(currentWeather.getTempCFeelsLike())));
+        binding.minTemp.setText(formatTemp(currentWeather.getTempCMin()));
+        binding.maxTemp.setText(formatTemp(currentWeather.getTempCMax()));
+        binding.windSpeed.setText(String.format("%s m/s ", currentWeather.getWindSpeed()));
+        binding.windDirection.setText(processWindDegree(currentWeather.getWindDirection()));
         binding.humidityText.setText(String.format("%s %%", currentWeather.getHumidity()));
     }
 
-    public void updateUIWhenNoResult() {
-        fragment.requireActivity().runOnUiThread(() -> binding.weatherDetailsLinearLayout.setVisibility(View.INVISIBLE));
-        Snackbar.make(fragment.requireContext(), fragment.requireView(), "Es ist ein Fehler aufgetreten.", Snackbar.LENGTH_LONG).show();
+    private String processWindDegree(double windDirection) {
+        if (0 > windDirection || 360 < windDirection) {
+            throw new IllegalArgumentException("The degree must be between 0 and 360!");
+        } else if (337 <= windDirection || windDirection < 22.5) {
+            return "N";
+        } else if (22.5 <= windDirection && windDirection < 67.5) {
+            return "NE";
+        } else if (67.5 <= windDirection && windDirection < 112.5) {
+            return "E";
+        } else if (112.5 <= windDirection && windDirection < 157.5) {
+            return "SE";
+        } else if (157.5 <= windDirection && windDirection < 202.5) {
+            return "S";
+        } else if (202.5 <= windDirection && windDirection < 247.5) {
+            return "SW";
+        } else if (247.5 <= windDirection && windDirection < 292.5) {
+            return "W";
+        } else if (292.5 <= windDirection && windDirection < 337.5) {
+            return "NW";
+        }
+        return "";
     }
 
-    public void updateUI(Weather currentWeather) {
-        fragment.requireActivity().runOnUiThread(() -> updateWeatherDetailsLayout(currentWeather));
+    private String formatTemp(Double temp) {
+        return String.format("%.0f", temp);
     }
-
-
-
-    // Include any other UI related methods here...
 }

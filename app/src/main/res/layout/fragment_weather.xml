@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:textSize="25sp"
-                    android:text="Münster"
+                    android:text=""
                     android:textStyle="normal"
                     android:id="@+id/locationText" />
 
@@ -96,7 +96,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="64dp"
                         android:layout_marginLeft="8dp"
-                        android:text="16°C"
+                        android:text="@string/loading"
                         android:textSize="30sp"
                         android:textStyle="bold"
                         android:id="@+id/temperature"
@@ -109,7 +109,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:textStyle="bold"
-                    android:text="Gefühlt 17°C"
+                    android:text="@string/loading"
                     android:textSize="20sp"
                     android:id="@+id/feelsLike" />
 
@@ -132,7 +132,7 @@
                         android:layout_height="32dp"
                         android:layout_marginLeft="8dp"
                         android:gravity="center_vertical"
-                        android:text="19"
+                        android:text="@string/loading"
                         android:textSize="16sp"
                         android:id="@+id/maxTemp" />
 
@@ -148,7 +148,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="32dp"
                         android:gravity="center_vertical"
-                        android:text="11"
+                        android:text="@string/loading"
                         android:textSize="16sp"
                         android:id="@+id/minTemp" />
 
@@ -180,7 +180,7 @@
                         android:layout_height="32dp"
                         android:layout_marginLeft="8dp"
                         android:gravity="center_vertical"
-                        android:text="2.7 m/s "
+                        android:text="@string/loading"
                         android:textSize="16sp"
                         android:id="@+id/windSpeed" />
 
@@ -188,7 +188,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="32dp"
                         android:gravity="center_vertical"
-                        android:text="SW"
+                        android:text="@string/loading"
                         android:textSize="16sp"
                         android:id="@+id/windDirection" />
 
@@ -213,7 +213,7 @@
                         android:layout_height="32dp"
                         android:layout_marginLeft="8dp"
                         android:gravity="center_vertical"
-                        android:text="62 %"
+                        android:text="@string/loading"
                         android:textSize="16sp"
                         android:id="@+id/humidityText" />
             </LinearLayout>
