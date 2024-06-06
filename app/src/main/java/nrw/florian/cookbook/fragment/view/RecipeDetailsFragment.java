@@ -169,17 +169,13 @@ public class RecipeDetailsFragment extends Fragment {
 
     private void initTags()
     {
-        // If no tags set -> hide tags
-        if (recipe.getRecipePropertyEntities() == null || recipe.getRecipePropertyEntities().isEmpty()) {
-            binding.tagsContainer.setVisibility(View.GONE);
-            binding.tagsTextView.setVisibility(View.GONE);
-            return;
-        }
-
+        binding.tagsLayoutContainer.removeAllViews();
         final FragmentTransaction transaction = requireActivity().getSupportFragmentManager()
                 .beginTransaction();
+        if (recipe.getCategory() != null)
+            transaction.add(R.id.tagsLayoutContainer, RecipeTagViewFragment.newInstance(recipe.getCategory().getString(requireContext()), R.color.primary));
         for (RecipePropertyEntity tag : recipe.getRecipePropertyEntities()) {
-            transaction.add(R.id.tagsLayoutContainer, RecipeTagViewFragment.newInstance(tag));
+            transaction.add(R.id.tagsLayoutContainer, RecipeTagViewFragment.newInstance(tag.getProperty().getString(requireContext()), R.color.tagBackground));
         }
         transaction.commit();
     }

@@ -167,7 +167,7 @@ public class EntryFragment extends Fragment {
                 return;
             }
             NavHostFragment.findNavController(this)
-                    .navigate(EntryFragmentDirections.actionEntryFragmentToRecipeDetailsFragment(2));
+                    .navigate(EntryFragmentDirections.actionEntryFragmentToWeatherFragment());
         });
     }
 

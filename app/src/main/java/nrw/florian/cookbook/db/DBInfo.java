@@ -53,7 +53,7 @@ public interface DBInfo {
                     "recipeID INTEGER NOT NULL," +
                     "name VARCHAR(255) NOT NULL," +
                     "unit VARCHAR(255) NOT NULL," +
-                    "quantity INTEGER NOT NULL," +
+                    "quantity REAL NOT NULL," +
                     "FOREIGN KEY (recipeID) REFERENCES " + TABLE_RECIPE + "(_id)" +
             ");";
 
